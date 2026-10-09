@@ -34,3 +34,5 @@ scoreboard players set @s GuHasTec 0
 scoreboard players set @s GuAmmoRv 0
 scoreboard players set @s GuMagRv 0
 scoreboard players set @s GuHasRv 0
+scoreboard players set @s GuBombUse 0
+scoreboard players set @s GuScope 0

@@ -1,4 +1,4 @@
-#実行者：爆撃弓の着弾点marker。警告表示の後、間隔をあけて爆撃（回数・間隔・威力は config の param.bombbow）
+#実行者：爆撃地点のmarker（望遠鏡で決めた地点）。警告表示の後、間隔をあけて爆撃（回数・間隔・威力は config の param.bombbow）
 scoreboard players remove @s GuTimer 1
 particle minecraft:dust{color:[1.0,0.1,0.1],scale:2.0} ~ ~0.2 ~ 2 0 2 0 4 force
 execute if score @s GuTimer matches 1.. run return 0

@@ -6,6 +6,7 @@ attribute @s minecraft:movement_speed modifier remove main:hs_sleep
 attribute @s minecraft:jump_strength modifier remove main:hs_sleep
 attribute @s minecraft:movement_speed modifier add main:hs_sleep -1 add_multiplied_total
 attribute @s minecraft:jump_strength modifier add main:hs_sleep -1 add_multiplied_total
+effect give @s minecraft:blindness infinite 0 true
 title @s times 5 30 10
 title @s subtitle {text:"麻酔弾で眠らされた（ダメージを受けると起きる）",color:"gray"}
 title @s title {text:"Zzz…",color:"aqua"}

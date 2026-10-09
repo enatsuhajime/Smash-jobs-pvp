@@ -1,6 +1,5 @@
 #上級ゲリラ兵が出したentity・表示の後片付け（試合終了時）
 kill @e[type=marker,tag=GuNadeM]
-kill @e[type=marker,tag=GuArrowM]
 kill @e[type=marker,tag=GuStrike]
 kill @e[type=marker,tag=GuCarpet]
 kill @e[type=marker,tag=GuHitPt]

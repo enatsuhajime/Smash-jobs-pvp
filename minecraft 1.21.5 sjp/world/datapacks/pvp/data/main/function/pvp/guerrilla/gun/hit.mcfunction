@@ -3,6 +3,7 @@ scoreboard players set #hit GuCalc 1
 #一撃で倒れても頭蓋骨が正しい位置に落ちるよう、ダメージ前に記録する（プレイヤーのみ）
 execute if entity @s[type=player] run function main:pvp/guerrilla/death/mark with storage main:guerrilla param.common
 data modify storage main:guerrilla hit.amount set from storage main:guerrilla shot.dmg
+data modify storage main:guerrilla hit.type set from storage main:guerrilla shot.type
 summon marker ~ ~ ~ {Tags:["GuHitPt"]}
 function main:pvp/guerrilla/gun/hs_check with storage main:guerrilla param.common
 kill @e[type=marker,tag=GuHitPt]

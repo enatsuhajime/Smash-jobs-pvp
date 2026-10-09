@@ -20,9 +20,7 @@ execute as @e[type=player,tag=Guerrilla,gamemode=!spectator] at @s if entity @e[
 
 #投擲物・爆撃
 execute as @e[type=snowball,tag=!GuSeen] at @s run function main:pvp/guerrilla/projectile/scan_snowball
-execute as @e[type=arrow,tag=!GuSeen] at @s run function main:pvp/guerrilla/projectile/scan_arrow
 execute as @e[type=marker,tag=GuNadeM] at @s run function main:pvp/guerrilla/projectile/nade_tick
-execute as @e[type=marker,tag=GuArrowM] at @s run function main:pvp/guerrilla/projectile/arrow_tick
 execute as @e[type=marker,tag=GuStrike] at @s run function main:pvp/guerrilla/reward/strike_tick
 execute as @e[type=marker,tag=GuCarpet] at @s run function main:pvp/guerrilla/reward/carpet_tick
 execute as @e[type=creeper,tag=GuBomb] at @s run function main:pvp/guerrilla/reward/bomb_tick

@@ -13,12 +13,13 @@
 #  far / far_dmg  距離減衰：far ブロックを超えると、ダメージ（ヘッドショット含む）が far_dmg になる（1 = 0.5ハート。far:0 で減衰なし）
 #  crouch_move  しゃがみ歩き中の拡散倍率（×10。しゃがみ止まりの拡散 spread_c に掛ける。9 = しゃがみ止まりより少し良い、12 = 少し悪い）
 #  max_dmg  1回の射撃で同じ相手に与えるダメージの上限（10 = 5ハート。0 で上限なし）
-data modify storage main:guerrilla param.sg set value {dmg:2,hs:2,pellets:10,range:20,rpm:70,spread_c:560,spread_s:1180,move:20,mag:5,reload:30,weight:-0.1,far:10,far_dmg:1,crouch_move:9,max_dmg:10}
-data modify storage main:guerrilla param.ak set value {dmg:3,hs:6,pellets:1,range:40,rpm:600,spread_c:571,spread_s:853,move:40,mag:30,reload:40,weight:-0.15,far:10,far_dmg:1,crouch_move:9,max_dmg:0}
-data modify storage main:guerrilla param.gl set value {dmg:3,hs:4,pellets:1,range:40,rpm:500,spread_c:571,spread_s:853,move:40,mag:35,reload:40,weight:-0.15,far:10,far_dmg:1,crouch_move:9,max_dmg:0}
-data modify storage main:guerrilla param.p90 set value {dmg:2,hs:2,pellets:1,range:40,rpm:960,spread_c:571,spread_s:1131,move:15,mag:50,reload:50,weight:0.1,far:10,far_dmg:1,crouch_move:9,max_dmg:0}
-data modify storage main:guerrilla param.tec set value {dmg:2,hs:3,pellets:1,range:40,rpm:400,spread_c:571,spread_s:571,move:10,mag:20,reload:30,weight:0.15,far:10,far_dmg:1,crouch_move:9,max_dmg:0}
-data modify storage main:guerrilla param.rv set value {dmg:8,hs:15,pellets:1,range:40,rpm:77,spread_c:286,spread_s:286,move:40,mag:6,reload:50,weight:0.15,far:10,far_dmg:1,crouch_move:9,max_dmg:0}
+#  knockback  1 = 当たった相手をノックバックさせる（ショットガン）、0 = ノックバックなし
+data modify storage main:guerrilla param.sg set value {dmg:2,hs:2,pellets:10,range:20,rpm:70,spread_c:644,spread_s:1357,move:20,mag:5,reload:30,weight:-0.1,far:10,far_dmg:1,crouch_move:9,max_dmg:10,knockback:1}
+data modify storage main:guerrilla param.ak set value {dmg:2.5,hs:5,pellets:1,range:40,rpm:600,spread_c:571,spread_s:853,move:40,mag:30,reload:40,weight:-0.15,far:10,far_dmg:1,crouch_move:9,max_dmg:0,knockback:0}
+data modify storage main:guerrilla param.gl set value {dmg:2.5,hs:4,pellets:1,range:40,rpm:500,spread_c:571,spread_s:853,move:40,mag:35,reload:40,weight:-0.15,far:10,far_dmg:1,crouch_move:9,max_dmg:0,knockback:0}
+data modify storage main:guerrilla param.p90 set value {dmg:2,hs:2,pellets:1,range:40,rpm:960,spread_c:685,spread_s:1357,move:15,mag:50,reload:50,weight:0.1,far:10,far_dmg:1,crouch_move:9,max_dmg:0,knockback:0}
+data modify storage main:guerrilla param.tec set value {dmg:2,hs:3,pellets:1,range:40,rpm:400,spread_c:571,spread_s:571,move:10,mag:20,reload:30,weight:0.15,far:10,far_dmg:1,crouch_move:9,max_dmg:0,knockback:0}
+data modify storage main:guerrilla param.rv set value {dmg:8,hs:15,pellets:1,range:40,rpm:77,spread_c:286,spread_s:286,move:40,mag:6,reload:50,weight:0.15,far:10,far_dmg:1,crouch_move:9,max_dmg:0,knockback:0}
 
 #銃共通
 #  hs_radius ヘッドショット判定の半径（目の位置から）   assist アシストとみなす時間（tick）
@@ -40,14 +41,17 @@ data modify storage main:guerrilla param.reward set value {uav:1,bombbow:3,carpe
 #UAV：seconds 発光させる秒数
 data modify storage main:guerrilla param.uav set value {seconds:10}
 
-#爆撃弓：arrows 矢の本数 / count 爆撃回数 / warn 着弾から1回目までの警告時間（tick） / interval 爆撃の間隔（tick） / radius / damage
-data modify storage main:guerrilla param.bombbow set value {arrows:3,count:3,warn:20,interval:10,radius:4,damage:10}
+#爆撃要請（望遠鏡）：望遠鏡をのぞいて離した瞬間に、見ていた地点を爆撃する
+#  uses 使える回数 / aim 狙える距離（ブロック） / count 1地点あたりの爆撃回数 / warn 決定から1回目までの警告時間（tick） / interval 爆撃の間隔（tick） / radius / damage
+data modify storage main:guerrilla param.bombbow set value {uses:3,aim:100,count:3,warn:20,interval:10,radius:4,damage:10}
 
 #絨毯爆撃：height 高さ / speed 1tickに進む距離 / duration 飛行時間（tick） / bombs 投下するクリーパーの総数 / radius / damage
 data modify storage main:guerrilla param.carpet set value {height:15,speed:0.8,duration:75,bombs:14,radius:4,damage:12}
 
 #内部で使う定数（変更不要）
 scoreboard objectives add GuShotDmg dummy
+scoreboard objectives add GuScope dummy
+scoreboard objectives add GuBombUse dummy
 scoreboard players set #10 GuCalc 10
 scoreboard players set #2 GuCalc 2
 scoreboard players set #4 GuCalc 4

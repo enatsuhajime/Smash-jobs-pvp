@@ -26,6 +26,10 @@ execute unless items entity @s weapon.mainhand *[minecraft:custom_data~{gu:"p90"
 #リロード
 execute if score @s GuReload matches 1.. run function main:pvp/guerrilla/gun/reload_tick
 
+#爆撃要請の望遠鏡：のぞくのをやめたら（2tick更新がなければ）爆撃地点を決める
+scoreboard players remove @s[scores={GuScope=1..}] GuScope 1
+execute if entity @s[tag=GuScoping] if score @s GuScope matches ..0 run function main:pvp/guerrilla/reward/scope_release
+
 #射撃・支給品の使用
 execute if score @s GuHoldT matches 1.. run function main:pvp/guerrilla/gun/held
 execute if entity @s[tag=GuReq] run function main:pvp/guerrilla/gun/semi

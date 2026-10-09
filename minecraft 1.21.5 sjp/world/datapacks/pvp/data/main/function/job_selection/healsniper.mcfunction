@@ -20,7 +20,7 @@ execute as @p run function main:pvp/healsniper/init_player
 clear @p
 execute as @p run function main:pvp/healsniper/item/give_rifle
 execute as @p run function main:pvp/healsniper/item/give_dart
-execute as @p run function main:pvp/healsniper/item/give_nano
+#ナノブーストはキルすると手に入る
 give @p minecraft:bread 64
 
 #ステータス

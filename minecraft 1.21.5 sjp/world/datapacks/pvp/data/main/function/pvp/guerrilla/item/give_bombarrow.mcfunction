@@ -1,1 +1,0 @@
-$give @s minecraft:arrow[custom_name={text:"爆撃の矢",color:"gold",italic:false},lore=[{text:"爆撃弓で撃つ専用の矢",color:"white",italic:false},{text:"死亡すると失う",color:"red",italic:false}],custom_data={gu:"bombarrow",gu_item:1b,gu_loot:1b}] $(arrows)

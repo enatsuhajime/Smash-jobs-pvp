@@ -1,4 +1,4 @@
-#1発撃つ（実行者：射手）。味方に当たれば回復、敵に当たればダメージと毒
+#1発撃つ（実行者：射手）。味方に当たれば回復、敵に当たればダメージ
 tag @s add HsShooter
 scoreboard players set #team HsCalc 0
 execute if entity @s[team=Blue] run scoreboard players set #team HsCalc 1

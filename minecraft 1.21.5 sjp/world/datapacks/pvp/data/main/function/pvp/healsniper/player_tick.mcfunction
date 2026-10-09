@@ -5,7 +5,8 @@ execute if score @s HsUse matches 1.. run tag @s add HsReq
 scoreboard players set @s HsUse 0
 scoreboard players remove @s[scores={HsCool=1..}] HsCool 1
 scoreboard players remove @s[scores={HsDartCD=1..}] HsDartCD 1
-scoreboard players remove @s[scores={HsNanoCT=1..}] HsNanoCT 1
+#キルするとナノブーストが手に入る（持てるのは1個まで）
+execute if score @s HsKill >= #nanokills HsCalc run function main:pvp/healsniper/nano/kill_reward
 
 #ズーム：スナイパーを持ってスニークしている間
 execute if predicate main:is_sneaking if items entity @s weapon.mainhand *[minecraft:custom_data~{hs:"rifle"}] unless entity @s[tag=HsZoom] run function main:pvp/healsniper/rifle/zoom_on with storage main:healsniper param.rifle

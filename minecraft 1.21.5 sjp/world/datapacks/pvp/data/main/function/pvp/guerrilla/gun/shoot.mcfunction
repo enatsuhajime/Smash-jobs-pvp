@@ -15,4 +15,8 @@ scoreboard players operation #far GuCalc *= #4 GuCalc
 #1回の射撃で同じ相手に与えるダメージの上限（×10で計算。0 なら上限なし）
 $scoreboard players set #maxd GuCalc $(max_dmg)
 scoreboard players operation #maxd GuCalc *= #10 GuCalc
+#ノックバック：knockback 1 の銃（ショットガン）だけノックバックありのダメージにする
+data modify storage main:guerrilla shot.type set value "main:gu_bullet"
+$scoreboard players set #kb GuCalc $(knockback)
+execute if score #kb GuCalc matches 1 run data modify storage main:guerrilla shot.type set value "main:gu_pellet"
 function main:pvp/guerrilla/gun/fire

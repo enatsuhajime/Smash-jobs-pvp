@@ -19,3 +19,5 @@ scoreboard players set @s GuReload 0
 scoreboard players set @s GuReloadW 0
 execute store result score @s GuAmmoSg run data get storage main:guerrilla param.sg.mag
 function main:pvp/guerrilla/item/ensure
+scoreboard players set @s GuBombUse 0
+tag @s remove GuScoping
