@@ -53,3 +53,4 @@ tag @a remove Wraith2
 tag @a remove Wraith3
 tag @a remove Musician
 tag @a remove Wich
+tag @a remove Guerrilla

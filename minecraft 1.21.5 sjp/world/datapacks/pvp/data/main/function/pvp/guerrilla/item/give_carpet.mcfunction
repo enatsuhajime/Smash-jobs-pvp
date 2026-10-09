@@ -1,0 +1,1 @@
+give @s minecraft:carrot_on_a_stick[custom_name={text:"絨毯爆撃要請",color:"gold",italic:false},custom_data={gu:"carpet",gu_item:1b,gu_loot:1b},item_model="minecraft:dragon_head",unbreakable={},lore=[{text:"右クリックで、向いている方向へエンダードラゴンが絨毯爆撃を行う",color:"gray",italic:false}],enchantment_glint_override=true] 1

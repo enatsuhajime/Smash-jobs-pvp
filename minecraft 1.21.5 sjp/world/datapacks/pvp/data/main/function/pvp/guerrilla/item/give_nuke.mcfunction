@@ -1,0 +1,1 @@
+give @s minecraft:carrot_on_a_stick[custom_name={text:"大規模爆風爆弾",color:"gold",italic:false},custom_data={gu:"nuke",gu_item:1b,gu_loot:1b},item_model="minecraft:tnt",unbreakable={},lore=[{text:"右クリックで発動",color:"gray",italic:false}],enchantment_glint_override=true] 1

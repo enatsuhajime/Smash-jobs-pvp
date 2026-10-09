@@ -31,6 +31,7 @@ scoreboard players set prototype PickPool 0
 scoreboard players set birdman PickPool 0
 scoreboard players set dusk PickPool 0
 scoreboard players set magicking PickPool 0
+scoreboard players set guerrilla PickPool 0
 
 # 未実装・実装予定ジョブ
 scoreboard players set fighter PickPool 3

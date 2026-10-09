@@ -1,0 +1,1 @@
+give @s minecraft:carrot_on_a_stick[custom_name={text:"UAV",color:"gold",italic:false},custom_data={gu:"uav",gu_item:1b,gu_loot:1b},item_model="minecraft:recovery_compass",unbreakable={},lore=[{text:"右クリックで敵全員を10秒間発光させる",color:"gray",italic:false}],enchantment_glint_override=true] 1

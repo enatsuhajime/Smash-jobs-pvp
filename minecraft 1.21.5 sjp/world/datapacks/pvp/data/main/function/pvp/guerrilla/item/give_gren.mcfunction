@@ -1,0 +1,1 @@
+give @s minecraft:snowball[custom_name={text:"グレネード",color:"gold",italic:false},custom_data={gu:"gren",gu_item:1b,gu_loot:1b},item_model="minecraft:fire_charge",lore=[{text:"投げると着弾地点で爆発する",color:"gray",italic:false}]] 1

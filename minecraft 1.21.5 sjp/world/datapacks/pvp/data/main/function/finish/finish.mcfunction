@@ -6,6 +6,8 @@ data remove storage main:stage_start running
 
 #魔王の設置ブロックと一時attributeを先に復元
 execute if data storage main:magicking {setup:1b} run function main:pvp/magicking/reset_world
+#上級ゲリラ兵の召喚物・ドロップ品・表示を削除
+execute if data storage main:guerrilla {setup:1b} run function main:pvp/guerrilla/reset_world
 
 #ジョブ能力によるエンティティと設置ブロックの削除
 function main:pvp/dusk/reset
@@ -83,6 +85,7 @@ tag @a remove Trapper
 tag @a remove Thor
 tag @a remove Peacekeeper
 execute as @a[tag=MagicKing] at @s run function main:pvp/magicking/reset_player
+execute as @a[tag=Guerrilla] at @s run function main:pvp/guerrilla/reset_player
 function main:job_selection/tag_reset
 
 

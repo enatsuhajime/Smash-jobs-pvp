@@ -1,0 +1,1 @@
+give @s minecraft:carrot_on_a_stick[custom_name={text:"オートピストル（Tec9）",color:"gold",italic:false},custom_data={gu:"tec",gu_item:1b,gu_loot:1b},item_model="minecraft:wooden_hoe",unbreakable={},lore=[{text:"単発RPM400・移動で精度低下なし（ダメージ2/HS3・拡散2・弾数20は仮）",color:"gray",italic:false},{text:"右クリックで射撃。しゃがむと精度が上がる",color:"gray",italic:false}]] 1

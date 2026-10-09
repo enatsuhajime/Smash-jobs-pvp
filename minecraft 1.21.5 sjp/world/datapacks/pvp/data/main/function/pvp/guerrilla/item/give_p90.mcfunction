@@ -1,0 +1,1 @@
+give @s minecraft:carrot_on_a_stick[custom_name={text:"SMG（P90）",color:"gold",italic:false},custom_data={gu:"p90",gu_item:1b,gu_loot:1b},item_model="minecraft:golden_hoe",unbreakable={},lore=[{text:"連射RPM960・2/HS2・10mで しゃがみ2/通常4・移動1.5倍（弾数50は仮）",color:"gray",italic:false},{text:"右クリックで射撃。しゃがむと精度が上がる",color:"gray",italic:false}]] 1

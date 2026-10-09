@@ -79,3 +79,5 @@ execute if entity @a[tag=Heretic] run function main:pvp/heretic/heretic
 execute if entity @a[tag=Poseidon] run function main:pvp/poseidon/poseidon
 #羊飼い
 execute if entity @a[tag=Shepherd] run function main:pvp/shepherd/shepherd
+#上級ゲリラ兵
+execute if entity @a[tag=Guerrilla] run function main:pvp/guerrilla/guerrilla
