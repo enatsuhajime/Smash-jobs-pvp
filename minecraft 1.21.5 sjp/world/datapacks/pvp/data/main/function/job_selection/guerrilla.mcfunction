@@ -29,7 +29,7 @@ attribute @p minecraft:attack_damage base set 1
 attribute @p minecraft:attack_speed base set 1
 attribute @p minecraft:max_health base set 20
 attribute @p minecraft:armor base set 0
-attribute @p minecraft:movement_speed base set 0.5
+attribute @p minecraft:movement_speed base set 0.1
 attribute @p minecraft:entity_interaction_range base set 2
 attribute @p minecraft:scale base set 0.9
 

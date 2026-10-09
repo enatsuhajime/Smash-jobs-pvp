@@ -12,6 +12,9 @@ scoreboard players set @a[scores={GuKill=1..}] GuKill 0
 scoreboard players remove @a[scores={GuAssist=1..}] GuAssist 1
 execute as @e[type=player,scores={GuAssist=1..}] run function main:pvp/guerrilla/death/store_pos
 
+#ゲリラ兵が捨てた装備は誰にも拾わせない（新しく出たアイテムだけ1回調べる）
+execute as @e[type=item,tag=!GuChk] run function main:pvp/guerrilla/drop/scan_item
+
 #ドロップ品の拾得（ゲリラ兵のみ・生存中のみ）
 execute as @e[type=player,tag=Guerrilla,gamemode=!spectator] at @s if entity @e[type=item,tag=GuDrop,distance=..1.5] run function main:pvp/guerrilla/drop/pickup
 

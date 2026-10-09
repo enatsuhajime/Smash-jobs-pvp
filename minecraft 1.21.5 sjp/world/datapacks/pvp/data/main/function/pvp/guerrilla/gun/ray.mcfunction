@@ -4,7 +4,7 @@ execute if score #team GuCalc matches 2 as @e[type=player,team=Blue,gamemode=!sp
 execute if score #hit GuCalc matches 1 run return 0
 #曳光（2ブロックごと）
 scoreboard players add #tr GuCalc 1
-execute if score #tr GuCalc matches 8.. run particle minecraft:crit ~ ~ ~ 0 0 0 0 1
+execute if score #trace GuCalc matches 1 if score #tr GuCalc matches 8.. run particle minecraft:crit ~ ~ ~ 0 0 0 0 1
 execute if score #tr GuCalc matches 8.. run scoreboard players set #tr GuCalc 0
 scoreboard players remove #steps GuCalc 1
 execute if score #steps GuCalc matches 1.. positioned ^ ^ ^0.25 if block ~ ~ ~ #main:gu_passable run function main:pvp/guerrilla/gun/ray

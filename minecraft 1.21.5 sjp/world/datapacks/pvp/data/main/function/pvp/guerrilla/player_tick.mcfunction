@@ -16,9 +16,6 @@ scoreboard players set @s GuWalk 0
 scoreboard players set @s GuSprint 0
 scoreboard players set @s GuCrouchM 0
 
-#しゃがむと体が小さくなる
-execute if predicate main:is_sneaking unless entity @s[tag=GuCrouch] run function main:pvp/guerrilla/body/crouch_on
-execute unless predicate main:is_sneaking if entity @s[tag=GuCrouch] run function main:pvp/guerrilla/body/crouch_off
 
 #P90を持っている間はしゃがみ中も速い
 execute if items entity @s weapon.mainhand *[minecraft:custom_data~{gu:"p90"}] unless entity @s[tag=GuP90] run function main:pvp/guerrilla/body/p90_on
