@@ -1,7 +1,6 @@
 #縫世
 
-#画面表示
-execute if entity @a[tag=Ruciano] as @a[tag=Ruciano] run title @s actionbar [{"text":"束の間の幻影 ct:1000 ","color":"dark_gray"},{"text":"   CT:  ","color":"black"},{"score":{"name":"*","objective":"sneak"},"color":"dark_purple"}]
+#画面表示は main:pvp/ruciano/hud で行う
 
 
 #時計配布

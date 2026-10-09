@@ -1,3 +1,6 @@
+#プレイヤーごとの処理（射撃・リロード・HUD表示）
+execute as @a[tag=Ruciano] at @s run function main:pvp/ruciano/player_tick
+
 #逢瀬
 execute if entity @a[tag=Ruciano] run function main:pvp/ruciano/ruciano_hs
 

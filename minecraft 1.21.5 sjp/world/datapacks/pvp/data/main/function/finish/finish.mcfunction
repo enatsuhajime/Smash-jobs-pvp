@@ -80,6 +80,7 @@ tag @a remove Bomber
 tag @a remove Hunter
 tag @a remove Guardian
 tag @a remove SwordMaster
+execute as @a[tag=Ruciano] at @s run function main:pvp/ruciano/reset_player
 tag @a remove Ruciano
 tag @a remove Singed
 tag @a remove ScouterBow

@@ -99,6 +99,9 @@ execute at @e[tag=jobsentakuKun] run data merge block ~-4 ~3 ~ {front_text:{mess
 #羊飼い
 execute at @e[tag=jobsentakuKun] run data merge block ~-5 ~3 ~ {front_text:{messages:["",{"text":"【羊飼い】を選ぶ！","color":"white","click_event":{"action":"run_command","command":"/function main:job_selection/shepherd"}},"",""]}}
 
+#衛生兵
+execute at @e[tag=jobsentakuKun] run data merge block ~-6 ~3 ~ {front_text:{messages:["",{"text":"【衛生兵】を選ぶ！","color":"white","click_event":{"action":"run_command","command":"/function main:job_selection/healsniper"}},"",""]}}
+
 
 
 #補助
