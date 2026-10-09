@@ -1,9 +1,9 @@
 #実行者：ゲリラ兵
 
-#入力：ニンジン付きの棒の使用回数。右クリック長押し中は約4tickごとに増えるため、5tick以内の再入力を「押し続け」とみなす
+#入力：ニンジン付きの棒の使用回数。右クリック長押し中は約4tickごとに増えるため、hold tick 以内の再入力を「押し続け」とみなす（config の param.common.hold）
 scoreboard players set @s GuPress 0
 execute if score @s GuUse matches 1.. unless score @s GuHoldT matches 1.. run scoreboard players set @s GuPress 1
-execute if score @s GuUse matches 1.. run scoreboard players set @s GuHoldT 5
+execute if score @s GuUse matches 1.. run scoreboard players operation @s GuHoldT = #hold GuCalc
 execute unless score @s GuUse matches 1.. if score @s GuHoldT matches 1.. run scoreboard players remove @s GuHoldT 1
 #単発銃の発射要求（クリック1回ごと。連射間隔中は1発ぶん予約される）
 execute if score @s GuUse matches 1.. run tag @s add GuReq

@@ -13,8 +13,10 @@ execute if predicate main:is_sneaking if items entity @s weapon.mainhand *[minec
 execute if entity @s[tag=HsZoom] unless predicate main:is_sneaking run function main:pvp/healsniper/rifle/zoom_off
 execute if entity @s[tag=HsZoom] unless items entity @s weapon.mainhand *[minecraft:custom_data~{hs:"rifle"}] run function main:pvp/healsniper/rifle/zoom_off
 
-#リロード
+#リロード（スナイパーを持っている間は耐久値バーで進み具合を表示）
 execute if score @s HsReload matches 1.. run function main:pvp/healsniper/rifle/reload_tick
+execute if score @s HsReload matches 1.. if items entity @s weapon.mainhand *[minecraft:custom_data~{hs:"rifle"}] run function main:pvp/healsniper/rifle/reload_bar
+execute unless score @s HsReload matches 1.. if items entity @s weapon.mainhand *[minecraft:custom_data~{hs:"rifle",hs_bar:1b}] run item modify entity @s weapon.mainhand [{function:"minecraft:set_components",components:{"!minecraft:damage":{},"!minecraft:max_damage":{}}},{function:"minecraft:set_custom_data",tag:{hs_bar:0b}}]
 
 #使用
 execute if entity @s[tag=HsReq] run function main:pvp/healsniper/use

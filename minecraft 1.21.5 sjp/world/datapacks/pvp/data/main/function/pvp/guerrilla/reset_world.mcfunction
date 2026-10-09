@@ -3,7 +3,6 @@ kill @e[type=marker,tag=GuNadeM]
 kill @e[type=marker,tag=GuStrike]
 kill @e[type=marker,tag=GuCarpet]
 kill @e[type=marker,tag=GuFire]
-kill @e[type=marker,tag=GuHitPt]
 execute as @e[type=ender_dragon,tag=GuDragon] at @s run tp @s ~ -300 ~
 kill @e[type=ender_dragon,tag=GuDragon]
 execute as @e[type=creeper,tag=GuBomb] at @s run tp @s ~ -300 ~
