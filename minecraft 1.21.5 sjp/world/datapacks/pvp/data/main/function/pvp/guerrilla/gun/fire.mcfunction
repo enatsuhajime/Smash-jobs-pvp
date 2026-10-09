@@ -1,4 +1,4 @@
-#弾を撃つ（実行者：射手。storage main:guerrilla shot の n/dmg/hs/steps/pellets を使う）
+#弾を撃つ（実行者：射手。storage main:guerrilla shot の n/dmg/steps/pellets を使う）
 tag @s add GuShooter
 scoreboard players reset * GuShotDmg
 scoreboard players set #hitsnd GuCalc 0

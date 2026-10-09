@@ -4,10 +4,7 @@ scoreboard players set #hit GuCalc 1
 execute if entity @s[type=player] run function main:pvp/guerrilla/death/mark with storage main:guerrilla param.common
 data modify storage main:guerrilla hit.amount set from storage main:guerrilla shot.dmg
 data modify storage main:guerrilla hit.type set from storage main:guerrilla shot.type
-summon marker ~ ~ ~ {Tags:["GuHitPt"]}
-function main:pvp/guerrilla/gun/hs_check with storage main:guerrilla param.common
-kill @e[type=marker,tag=GuHitPt]
-#距離による減衰：far ブロックを超えたら far_dmg（ヘッドショットも同じ）
+#距離による減衰：far ブロックを超えたら far_dmg
 execute if score #far GuCalc matches 1.. if score #d GuCalc > #far GuCalc run data modify storage main:guerrilla hit.amount set from storage main:guerrilla shot.far_dmg
 #ダメージ上限（max_dmg）
 scoreboard players set #skip GuCalc 0

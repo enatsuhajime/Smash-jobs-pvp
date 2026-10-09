@@ -4,6 +4,7 @@
     "main:gu_nuke",
     "main:gu_bullet",
     "main:gu_explosion",
-    "main:gu_pellet"
+    "main:gu_pellet",
+    "main:rc_bullet"
   ]
 }
