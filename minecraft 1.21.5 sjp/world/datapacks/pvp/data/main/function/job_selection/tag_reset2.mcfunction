@@ -1,5 +1,6 @@
 execute as @p[tag=MagicKing] at @s run function main:pvp/magicking/reset_player
 execute as @p[tag=Guerrilla] at @s run function main:pvp/guerrilla/reset_player
+execute as @p[tag=HealSniper] at @s run function main:pvp/healsniper/reset_player
 tag @p remove Sword
 tag @p remove Wizard
 tag @p remove MagicKing
@@ -80,5 +81,6 @@ tag @p remove WraithCurrentOut
 tag @p remove Musician
 tag @a remove Wich
 tag @p remove Guerrilla
+tag @p remove HealSniper
 function main:job_selection/set/state_reset
 clear @p

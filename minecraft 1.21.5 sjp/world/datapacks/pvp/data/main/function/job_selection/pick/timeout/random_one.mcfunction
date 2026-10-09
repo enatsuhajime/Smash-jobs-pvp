@@ -1,6 +1,6 @@
 execute if score #debug PickCtrl matches 0 run tellraw @s {"text":"時間切れのため、使用可能なジョブをランダムに割り当てます。","color":"yellow"}
 execute if score #debug PickCtrl matches 1 run tellraw @s {"text":"[デバッグ] ファーストピック以外のため、使用可能なジョブをランダムに割り当てます。","color":"aqua"}
-execute store result score #random PickCtrl run random value 1..34
+execute store result score #random PickCtrl run random value 1..35
 execute if score #random PickCtrl matches 1 if score herobrine PickPool matches 0 run function main:job_selection/herobrine
 execute if score #random PickCtrl matches 2 if score wizardsword PickPool matches 0 run function main:job_selection/wizardsword
 execute if score #random PickCtrl matches 3 if score assistwarrior PickPool matches 0 run function main:job_selection/assistwarrior
@@ -35,4 +35,5 @@ execute if score #random PickCtrl matches 31 if score birdman PickPool matches 0
 execute if score #random PickCtrl matches 32 if score dusk PickPool matches 0 run function main:job_selection/dusk
 execute if score #random PickCtrl matches 33 if score magicking PickPool matches 0 run function main:job_selection/magicking
 execute if score #random PickCtrl matches 34 if score guerrilla PickPool matches 0 run function main:job_selection/guerrilla
+execute if score #random PickCtrl matches 35 if score healsniper PickPool matches 0 run function main:job_selection/healsniper
 execute if entity @s[tag=PickAllowed] run function main:job_selection/pick/timeout/random_one

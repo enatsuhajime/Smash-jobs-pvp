@@ -54,3 +54,4 @@ tag @a remove Wraith3
 tag @a remove Musician
 tag @a remove Wich
 tag @a remove Guerrilla
+tag @a remove HealSniper
