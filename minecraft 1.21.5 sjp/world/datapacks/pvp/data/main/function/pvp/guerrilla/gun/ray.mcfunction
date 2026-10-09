@@ -14,4 +14,5 @@ execute if score #tr GuCalc matches 2.. run scoreboard players set #tr GuCalc 0
 scoreboard players remove #steps GuCalc 1
 #壁に当たった位置に小さな着弾エフェクト
 execute if score #steps GuCalc matches 1.. positioned ^ ^ ^0.25 unless block ~ ~ ~ #main:gu_passable positioned ^ ^ ^-0.25 run particle minecraft:crit ~ ~ ~ 0.05 0.05 0.05 0.1 4 force @a
+execute if score #steps GuCalc matches 1.. positioned ^ ^ ^0.25 unless block ~ ~ ~ #main:gu_passable positioned ^ ^ ^-0.25 run particle minecraft:smoke ~ ~ ~ 0.05 0.05 0.05 0.01 2 force @a
 execute if score #steps GuCalc matches 1.. positioned ^ ^ ^0.25 if block ~ ~ ~ #main:gu_passable run function main:pvp/guerrilla/gun/ray

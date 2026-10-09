@@ -1,1 +1,0 @@
-$give @s minecraft:iron_sword[custom_name={text:"ナイフ",color:"gold",italic:false},custom_data={gu:"knife",gu_item:1b},unbreakable={},attribute_modifiers=[{type:"minecraft:attack_damage",amount:$(amount),operation:"add_value",slot:"mainhand",id:"main:gu_knife"}],lore=[{text:"背後から攻撃するとダメージが増える（バックスタブ）",color:"gray",italic:false}]] 1

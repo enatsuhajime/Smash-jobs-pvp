@@ -2,7 +2,6 @@
   "replace": false,
   "values": [
     "main:gu_bullet",
-    "main:gu_backstab",
     "main:gu_explosion"
   ]
 }

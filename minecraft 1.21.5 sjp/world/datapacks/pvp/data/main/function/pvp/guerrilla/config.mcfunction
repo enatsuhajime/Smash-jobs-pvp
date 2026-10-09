@@ -23,10 +23,11 @@ data modify storage main:guerrilla param.rv set value {dmg:8,hs:15,pellets:1,ran
 #  alt_model / alt_color  リロード中・コッキング中の見た目（革の馬鎧の染色色。10進のRGB値）
 #  trail_from / trail_size  弾の表示：表示を始める距離（ブロック。手前はクロスヘアにかからないよう出さない）と粒の大きさ
 #  whiz_radius  弾がこの距離（ブロック）以内をかすめた敵に風切り音を鳴らす
-data modify storage main:guerrilla param.common set value {hs_radius:0.45,assist:140,alt_model:"minecraft:leather_horse_armor",alt_color:4867385,trail_from:3,trail_size:0.6,whiz_radius:2}
+#  muzzle_fx / shell  発射エフェクト（1 = 閃光と薬莢を出す、0 = 控えめ）と薬莢の見た目のアイテム
+#  recoil_smoke  撃ったときに足元から舞う煙の量（0 で出さない）
+#  hit_pitch  命中音の高さ（1.0 = 標準。小さいほど低い）  blood  命中時の血の量（粒の数。0 で表示しない）
+data modify storage main:guerrilla param.common set value {hs_radius:0.45,assist:140,alt_model:"minecraft:leather_horse_armor",alt_color:4867385,trail_from:3,trail_size:0.6,whiz_radius:2,hit_pitch:0.9,blood:8,muzzle_fx:1,shell:"minecraft:gold_nugget",recoil_smoke:3}
 
-#ナイフ：damage 1撃のダメージ / backstab 背後からの追加ダメージ / angle 背後とみなす向きの差（±度）
-data modify storage main:guerrilla param.knife set value {damage:6,backstab:6,angle:60}
 
 #グレネード：radius 半径 / damage ダメージ
 data modify storage main:guerrilla param.grenade set value {radius:4,damage:12}

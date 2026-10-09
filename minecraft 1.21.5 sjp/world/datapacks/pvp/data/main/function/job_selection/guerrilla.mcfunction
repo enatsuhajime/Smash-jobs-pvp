@@ -22,7 +22,6 @@ execute as @p run function main:pvp/guerrilla/init_player
 #持ち物
 clear @p
 execute as @p run function main:pvp/guerrilla/item/give_sg
-execute as @p run function main:pvp/guerrilla/item/give_knife
 
 #ステータス
 function main:job_selection/set/state_reset
