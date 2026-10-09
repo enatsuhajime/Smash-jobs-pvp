@@ -6,3 +6,4 @@ attribute @s minecraft:sneaking_speed modifier remove main:gu_p90
 function main:pvp/guerrilla/body/weight_clear
 clear @s *[minecraft:custom_data~{gu_item:1b}]
 function main:pvp/guerrilla/init_player
+tag @s remove GuReq

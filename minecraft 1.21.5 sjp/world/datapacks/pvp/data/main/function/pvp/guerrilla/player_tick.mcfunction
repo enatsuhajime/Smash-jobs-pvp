@@ -5,6 +5,8 @@ scoreboard players set @s GuPress 0
 execute if score @s GuUse matches 1.. unless score @s GuHoldT matches 1.. run scoreboard players set @s GuPress 1
 execute if score @s GuUse matches 1.. run scoreboard players set @s GuHoldT 5
 execute unless score @s GuUse matches 1.. if score @s GuHoldT matches 1.. run scoreboard players remove @s GuHoldT 1
+#単発銃の発射要求（クリック1回ごと。連射間隔中は1発ぶん予約される）
+execute if score @s GuUse matches 1.. run tag @s add GuReq
 scoreboard players set @s GuUse 0
 scoreboard players remove @s[scores={GuCool=1..}] GuCool 1
 
@@ -26,6 +28,7 @@ execute if score @s GuReload matches 1.. run function main:pvp/guerrilla/gun/rel
 
 #射撃・支給品の使用
 execute if score @s GuHoldT matches 1.. run function main:pvp/guerrilla/gun/held
+execute if entity @s[tag=GuReq] run function main:pvp/guerrilla/gun/semi
 
 #武器の重さ・リロード／コッキング中の見た目
 function main:pvp/guerrilla/body/weight
