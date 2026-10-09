@@ -3,6 +3,8 @@
 #  銃は防具を貫通する（防具による軽減なし。ダメージタイプも #minecraft:bypasses_armor）
 #  プレイヤー：最大体力を一瞬下げて体力を切り詰める（tick で反映・翌tickに戻す）
 #  mob、または倒れる一撃：通常のダメージ（キルの記録・死亡メッセージのため）
+#撃った側の手ごたえ：ヒットマーカー（撃った本人にだけ表示）
+$execute as @a[tag=$(src),limit=1] at @s run function main:pvp/silent_damage/hitmarker
 $execute unless entity @s[type=player] run return run damage @s $(amount) $(type) by @a[tag=$(src),limit=1]
 
 #前のtickに下げた最大体力がまだ戻っていなければ先に戻す（このtickの計算を正しくするため）
