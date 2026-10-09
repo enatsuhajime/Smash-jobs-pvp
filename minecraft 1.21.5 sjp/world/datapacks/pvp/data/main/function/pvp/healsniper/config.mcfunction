@@ -24,6 +24,7 @@ data modify storage main:healsniper param.nano set value {kills:1,range:40,aim:2
 data modify storage main:healsniper param.common set value {hs_radius:0.45,trail_from:3,trail_size:0.5,blood:8}
 
 #内部で使う定数（変更不要）
+function main:pvp/silent_damage/setup
 scoreboard players set #2 HsCalc 2
 scoreboard players set #4 HsCalc 4
 scoreboard players set #20 HsCalc 20

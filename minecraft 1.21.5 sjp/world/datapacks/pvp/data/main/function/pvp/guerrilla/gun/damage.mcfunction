@@ -1,1 +1,1 @@
-$damage @s $(amount) $(type) by @a[tag=GuShooter,limit=1]
+$function main:pvp/silent_damage/hit {amount:$(amount),type:"$(type)",src:"GuShooter"}

@@ -1,1 +1,1 @@
-$damage @s $(dmg) main:hs_bullet by @a[tag=HsShooter,limit=1]
+$function main:pvp/silent_damage/hit {amount:$(dmg),type:"main:hs_bullet",src:"HsShooter"}

@@ -2,6 +2,7 @@
 kill @e[type=marker,tag=GuNadeM]
 kill @e[type=marker,tag=GuStrike]
 kill @e[type=marker,tag=GuCarpet]
+kill @e[type=marker,tag=GuFire]
 kill @e[type=marker,tag=GuHitPt]
 execute as @e[type=ender_dragon,tag=GuDragon] at @s run tp @s ~ -300 ~
 kill @e[type=ender_dragon,tag=GuDragon]
@@ -12,3 +13,4 @@ execute as @e[type=item] if items entity @s contents *[minecraft:custom_data~{gu
 bossbar remove main:gu_nuke
 scoreboard players set #nuke GuCalc 0
 kill @e[type=marker,tag=GuDbgPos]
+function main:pvp/silent_damage/clear

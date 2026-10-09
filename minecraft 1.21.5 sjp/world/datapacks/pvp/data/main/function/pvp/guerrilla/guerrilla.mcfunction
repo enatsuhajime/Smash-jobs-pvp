@@ -24,8 +24,12 @@ execute as @e[type=marker,tag=GuNadeM] at @s run function main:pvp/guerrilla/pro
 execute as @e[type=marker,tag=GuStrike] at @s run function main:pvp/guerrilla/reward/strike_tick
 execute as @e[type=marker,tag=GuCarpet] at @s run function main:pvp/guerrilla/reward/carpet_tick
 execute as @e[type=creeper,tag=GuBomb] at @s run function main:pvp/guerrilla/reward/bomb_tick
+execute as @e[type=marker,tag=GuFire] at @s run function main:pvp/guerrilla/reward/fire_tick
 execute if score #nuke GuCalc matches 1.. run function main:pvp/guerrilla/reward/nuke_tick
 
 #1秒ごとの整理（初期装備の維持・捨てた装備の削除）
 scoreboard players add #slow GuCalc 1
 execute if score #slow GuCalc matches 20.. run function main:pvp/guerrilla/slow
+
+#カメラの揺れなしダメージの反映（silent_damage）
+function main:pvp/silent_damage/tick
