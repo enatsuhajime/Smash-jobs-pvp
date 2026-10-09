@@ -31,7 +31,7 @@ attribute @p minecraft:max_health base set 20
 attribute @p minecraft:armor base set 0
 attribute @p minecraft:movement_speed base set 0.1
 attribute @p minecraft:entity_interaction_range base set 2
-attribute @p minecraft:scale base set 0.9
+attribute @p minecraft:scale base set 1.1
 
 title @a[tag=Standbypick] title ["",{"selector":"@p"},{"text":"：上級ゲリラ兵"}]
 execute at @e[tag=jobsentakuKun] run data merge block ~-18 ~3 ~ {front_text:{messages:["",{"selector":"@p"},"",""]},is_waxed:1b}

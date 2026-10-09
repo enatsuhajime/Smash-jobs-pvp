@@ -27,5 +27,9 @@ execute if score @s GuReload matches 1.. run function main:pvp/guerrilla/gun/rel
 #射撃・支給品の使用
 execute if score @s GuHoldT matches 1.. run function main:pvp/guerrilla/gun/held
 
+#武器の重さ・リロード／コッキング中の見た目
+function main:pvp/guerrilla/body/weight
+function main:pvp/guerrilla/gun/model
+
 #表示
 function main:pvp/guerrilla/hud
