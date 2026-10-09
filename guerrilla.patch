@@ -1,0 +1,1724 @@
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/advancement/guerrilla/knife_hit.json b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/advancement/guerrilla/knife_hit.json
+new file mode 100644
+index 0000000..776e789
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/advancement/guerrilla/knife_hit.json	
+@@ -0,0 +1,25 @@
++{
++  "criteria": {
++    "hit": {
++      "trigger": "minecraft:player_hurt_entity",
++      "conditions": {
++        "entity": {
++          "type": "minecraft:player"
++        },
++        "damage": {
++          "type": {
++            "tags": [
++              {
++                "id": "minecraft:is_player_attack",
++                "expected": true
++              }
++            ]
++          }
++        }
++      }
++    }
++  },
++  "rewards": {
++    "function": "main:pvp/guerrilla/knife/hit"
++  }
++}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/damage_type/gu_backstab.json b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/damage_type/gu_backstab.json
+new file mode 100644
+index 0000000..a7473fb
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/damage_type/gu_backstab.json	
+@@ -0,0 +1,5 @@
++{
++  "exhaustion": 0.1,
++  "message_id": "player",
++  "scaling": "never"
++}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/damage_type/gu_bullet.json b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/damage_type/gu_bullet.json
+new file mode 100644
+index 0000000..e3de0ea
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/damage_type/gu_bullet.json	
+@@ -0,0 +1,5 @@
++{
++  "exhaustion": 0.1,
++  "message_id": "arrow",
++  "scaling": "never"
++}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/damage_type/gu_explosion.json b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/damage_type/gu_explosion.json
+new file mode 100644
+index 0000000..2378f85
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/damage_type/gu_explosion.json	
+@@ -0,0 +1,5 @@
++{
++  "exhaustion": 0.1,
++  "message_id": "explosion.player",
++  "scaling": "never"
++}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/finish/finish.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/finish/finish.mcfunction
+index 6c26367..8b6547d 100644
+--- a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/finish/finish.mcfunction	
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/finish/finish.mcfunction	
+@@ -6,6 +6,8 @@ data remove storage main:stage_start running
+ 
+ #魔王の設置ブロックと一時attributeを先に復元
+ execute if data storage main:magicking {setup:1b} run function main:pvp/magicking/reset_world
++#上級ゲリラ兵の召喚物・ドロップ品・表示を削除
++execute if data storage main:guerrilla {setup:1b} run function main:pvp/guerrilla/reset_world
+ 
+ #ジョブ能力によるエンティティと設置ブロックの削除
+ function main:pvp/dusk/reset
+@@ -83,6 +85,7 @@ tag @a remove Trapper
+ tag @a remove Thor
+ tag @a remove Peacekeeper
+ execute as @a[tag=MagicKing] at @s run function main:pvp/magicking/reset_player
++execute as @a[tag=Guerrilla] at @s run function main:pvp/guerrilla/reset_player
+ function main:job_selection/tag_reset
+ 
+ 
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/guerrilla.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/guerrilla.mcfunction
+new file mode 100644
+index 0000000..db6f9de
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/guerrilla.mcfunction	
+@@ -0,0 +1,37 @@
++#上級ゲリラ兵（スネーク）
++
++execute if data storage main:pick {active:1b} unless entity @p[tag=PickBypass] as @p at @s run function main:job_selection/pick/input/job {job_id:34,pool:"guerrilla",job_name:"上級ゲリラ兵",job_function:"guerrilla",sign_x:-18,sign_y:3}
++execute if data storage main:pick {active:1b} unless entity @p[tag=PickBypass] run return 0
++
++execute unless data storage main:guerrilla {setup:1b} run function main:pvp/guerrilla/setup
++
++execute at @e[tag=jobsentakuKun] run data merge block ~-18 ~3 ~ {front_text:{messages:["",{"text":"BAN"},"",""]},is_waxed:1b}
++execute if entity @a[tag=FirstBAN] run return run function main:job_selection/tag_reset2
++
++function main:job_selection/tag_reset2
++
++tag @p add Guerrilla
++
++#初期状態
++scoreboard players add #next GuID 1
++scoreboard players operation @p GuID = #next GuID
++execute as @p run function main:pvp/guerrilla/init_player
++
++#持ち物
++clear @p
++execute as @p run function main:pvp/guerrilla/item/give_sg
++execute as @p run function main:pvp/guerrilla/item/give_knife
++give @p minecraft:bread 64
++
++#ステータス
++function main:job_selection/set/state_reset
++attribute @p minecraft:attack_damage base set 1
++attribute @p minecraft:attack_speed base set 1
++attribute @p minecraft:max_health base set 20
++attribute @p minecraft:armor base set 0
++attribute @p minecraft:movement_speed base set 0.5
++attribute @p minecraft:entity_interaction_range base set 2
++attribute @p minecraft:scale base set 0.9
++
++title @a[tag=Standbypick] title ["",{"selector":"@p"},{"text":"：上級ゲリラ兵"}]
++execute at @e[tag=jobsentakuKun] run data merge block ~-18 ~3 ~ {front_text:{messages:["",{"selector":"@p"},"",""]},is_waxed:1b}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/job_select_reset.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/job_select_reset.mcfunction
+index 4009b3d..8ddd935 100644
+--- a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/job_select_reset.mcfunction	
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/job_select_reset.mcfunction	
+@@ -129,4 +129,6 @@ execute at @e[tag=jobsentakuKun] run data merge block ~-15 ~3 ~ {front_text:{mes
+ 
+ #魔王
+ execute at @e[tag=jobsentakuKun] run data merge block ~-16 ~3 ~ {front_text:{messages:["",{"text":"【魔王】を選ぶ！","color":"white","click_event":{"action":"run_command","command":"/function main:job_selection/magicking"}},"",""]}}
++#上級ゲリラ兵（看板位置は要確認）
++execute at @e[tag=jobsentakuKun] run data merge block ~-18 ~3 ~ {front_text:{messages:["",{"text":"【上級ゲリラ兵】を選ぶ！","color":"white","click_event":{"action":"run_command","command":"/function main:job_selection/guerrilla"}},"",""]}}
+ 
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/pick/job_pool/reset.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/pick/job_pool/reset.mcfunction
+index dbae924..57bfdd8 100644
+--- a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/pick/job_pool/reset.mcfunction	
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/pick/job_pool/reset.mcfunction	
+@@ -31,6 +31,7 @@ scoreboard players set prototype PickPool 0
+ scoreboard players set birdman PickPool 0
+ scoreboard players set dusk PickPool 0
+ scoreboard players set magicking PickPool 0
++scoreboard players set guerrilla PickPool 0
+ 
+ # 未実装・実装予定ジョブ
+ scoreboard players set fighter PickPool 3
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/pick/timeout/random_one.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/pick/timeout/random_one.mcfunction
+index 88cf824..22f0205 100644
+--- a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/pick/timeout/random_one.mcfunction	
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/pick/timeout/random_one.mcfunction	
+@@ -1,6 +1,6 @@
+ execute if score #debug PickCtrl matches 0 run tellraw @s {"text":"時間切れのため、使用可能なジョブをランダムに割り当てます。","color":"yellow"}
+ execute if score #debug PickCtrl matches 1 run tellraw @s {"text":"[デバッグ] ファーストピック以外のため、使用可能なジョブをランダムに割り当てます。","color":"aqua"}
+-execute store result score #random PickCtrl run random value 1..33
++execute store result score #random PickCtrl run random value 1..34
+ execute if score #random PickCtrl matches 1 if score herobrine PickPool matches 0 run function main:job_selection/herobrine
+ execute if score #random PickCtrl matches 2 if score wizardsword PickPool matches 0 run function main:job_selection/wizardsword
+ execute if score #random PickCtrl matches 3 if score assistwarrior PickPool matches 0 run function main:job_selection/assistwarrior
+@@ -34,4 +34,5 @@ execute if score #random PickCtrl matches 30 if score prototype PickPool matches
+ execute if score #random PickCtrl matches 31 if score birdman PickPool matches 0 run function main:job_selection/birdman
+ execute if score #random PickCtrl matches 32 if score dusk PickPool matches 0 run function main:job_selection/dusk
+ execute if score #random PickCtrl matches 33 if score magicking PickPool matches 0 run function main:job_selection/magicking
++execute if score #random PickCtrl matches 34 if score guerrilla PickPool matches 0 run function main:job_selection/guerrilla
+ execute if entity @s[tag=PickAllowed] run function main:job_selection/pick/timeout/random_one
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/tag_reset.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/tag_reset.mcfunction
+index 546d7e1..8265a8e 100644
+--- a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/tag_reset.mcfunction	
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/tag_reset.mcfunction	
+@@ -52,4 +52,5 @@ tag @a remove Wraith1
+ tag @a remove Wraith2
+ tag @a remove Wraith3
+ tag @a remove Musician
+-tag @a remove Wich
+\ No newline at end of file
++tag @a remove Wich
++tag @a remove Guerrilla
+\ No newline at end of file
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/tag_reset2.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/tag_reset2.mcfunction
+index 6bea486..021a66b 100644
+--- a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/tag_reset2.mcfunction	
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/job_selection/tag_reset2.mcfunction	
+@@ -1,4 +1,5 @@
+ execute as @p[tag=MagicKing] at @s run function main:pvp/magicking/reset_player
++execute as @p[tag=Guerrilla] at @s run function main:pvp/guerrilla/reset_player
+ tag @p remove Sword
+ tag @p remove Wizard
+ tag @p remove MagicKing
+@@ -78,5 +79,6 @@ tag @p remove WraithCurrentIn
+ tag @p remove WraithCurrentOut
+ tag @p remove Musician
+ tag @a remove Wich
++tag @p remove Guerrilla
+ function main:job_selection/set/state_reset
+ clear @p
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/food/food.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/food/food.mcfunction
+index a3fd773..973f40e 100644
+--- a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/food/food.mcfunction	
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/food/food.mcfunction	
+@@ -5,4 +5,5 @@ scoreboard players remove @a[scores={foodcd=1..}] foodcd 1
+ execute as @a[scores={foodcd=..0,food=20..}] run scoreboard players set @s foodcd 600
+ 
+ #再生能力付与
+-execute as @a[scores={foodcd=600,food=20..}] run effect give @s minecraft:regeneration 15 0 true
++#上級ゲリラ兵は基礎体力回復なし
++execute as @a[scores={foodcd=600,food=20..},tag=!Guerrilla] run effect give @s minecraft:regeneration 15 0 true
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/body/crouch_off.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/body/crouch_off.mcfunction
+new file mode 100644
+index 0000000..07b2a93
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/body/crouch_off.mcfunction	
+@@ -0,0 +1,2 @@
++tag @s remove GuCrouch
++attribute @s minecraft:scale modifier remove main:gu_crouch
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/body/crouch_on.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/body/crouch_on.mcfunction
+new file mode 100644
+index 0000000..7c64b4f
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/body/crouch_on.mcfunction	
+@@ -0,0 +1,3 @@
++tag @s add GuCrouch
++#仮：しゃがみ中は scale を半分にする（0.9 → 0.45）
++attribute @s minecraft:scale modifier add main:gu_crouch -0.5 add_multiplied_total
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/body/p90_off.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/body/p90_off.mcfunction
+new file mode 100644
+index 0000000..d7c975b
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/body/p90_off.mcfunction	
+@@ -0,0 +1,2 @@
++tag @s remove GuP90
++attribute @s minecraft:sneaking_speed modifier remove main:gu_p90
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/body/p90_on.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/body/p90_on.mcfunction
+new file mode 100644
+index 0000000..440c124
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/body/p90_on.mcfunction	
+@@ -0,0 +1,3 @@
++tag @s add GuP90
++#仮：しゃがみ速度 0.3 → 0.8
++attribute @s minecraft:sneaking_speed modifier add main:gu_p90 0.5 add_value
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/death/drop_weapon.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/death/drop_weapon.mcfunction
+new file mode 100644
+index 0000000..06c97e9
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/death/drop_weapon.mcfunction	
+@@ -0,0 +1,9 @@
++#ランダム武器（等確率・仮）
++execute store result score #r GuCalc run random value 1..6
++execute if score #r GuCalc matches 1 run data modify storage main:guerrilla drop merge value {kind:"ak",item:"minecraft:iron_hoe",name:"AK47"}
++execute if score #r GuCalc matches 2 run data modify storage main:guerrilla drop merge value {kind:"gl",item:"minecraft:stone_hoe",name:"Garill"}
++execute if score #r GuCalc matches 3 run data modify storage main:guerrilla drop merge value {kind:"gren",item:"minecraft:fire_charge",name:"グレネード"}
++execute if score #r GuCalc matches 4 run data modify storage main:guerrilla drop merge value {kind:"p90",item:"minecraft:golden_hoe",name:"SMG（P90）"}
++execute if score #r GuCalc matches 5 run data modify storage main:guerrilla drop merge value {kind:"tec",item:"minecraft:wooden_hoe",name:"オートピストル（Tec9）"}
++execute if score #r GuCalc matches 6 run data modify storage main:guerrilla drop merge value {kind:"rv",item:"minecraft:netherite_hoe",name:"リボルバー"}
++function main:pvp/guerrilla/death/spawn with storage main:guerrilla drop
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/death/process.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/death/process.mcfunction
+new file mode 100644
+index 0000000..f47f8a4
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/death/process.mcfunction	
+@@ -0,0 +1,14 @@
++#実行者：死亡したプレイヤー
++scoreboard players set @s GuDeath 0
++execute if entity @s[tag=Guerrilla] run function main:pvp/guerrilla/death/self
++execute unless score @s GuAssist matches 1.. run return 0
++scoreboard players set @s GuAssist 0
++#7秒以内にゲリラ兵の攻撃を受けていた → 死亡位置に頭蓋骨
++execute store result storage main:guerrilla drop.x double 0.1 run scoreboard players get @s GuPX
++execute store result storage main:guerrilla drop.y double 0.1 run scoreboard players get @s GuPY
++execute store result storage main:guerrilla drop.z double 0.1 run scoreboard players get @s GuPZ
++data modify storage main:guerrilla drop merge value {kind:"skull",item:"minecraft:skeleton_skull",name:"頭蓋骨"}
++function main:pvp/guerrilla/death/spawn with storage main:guerrilla drop
++#倒したのが敵チームのゲリラ兵なら、武器もランダムで落とす
++execute if entity @s[team=Red] if entity @a[tag=Guerrilla,team=Blue,scores={GuKill=1..}] run function main:pvp/guerrilla/death/drop_weapon
++execute if entity @s[team=Blue] if entity @a[tag=Guerrilla,team=Red,scores={GuKill=1..}] run function main:pvp/guerrilla/death/drop_weapon
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/death/self.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/death/self.mcfunction
+new file mode 100644
+index 0000000..96b24ec
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/death/self.mcfunction	
+@@ -0,0 +1,21 @@
++#ゲリラ兵自身の死亡：頭蓋骨と拾った武器・支給品は消滅、初期装備は残す
++scoreboard players set @s GuSkull 0
++scoreboard players set @s GuRw1 0
++scoreboard players set @s GuRw3 0
++scoreboard players set @s GuRw5 0
++scoreboard players set @s GuRw10 0
++scoreboard players set @s GuHasAk 0
++scoreboard players set @s GuMagAk 0
++scoreboard players set @s GuHasGl 0
++scoreboard players set @s GuMagGl 0
++scoreboard players set @s GuHasP90 0
++scoreboard players set @s GuMagP90 0
++scoreboard players set @s GuHasTec 0
++scoreboard players set @s GuMagTec 0
++scoreboard players set @s GuHasRv 0
++scoreboard players set @s GuMagRv 0
++clear @s *[minecraft:custom_data~{gu_loot:1b}]
++scoreboard players set @s GuReload 0
++scoreboard players set @s GuReloadW 0
++scoreboard players set @s GuAmmoSg 5
++function main:pvp/guerrilla/item/ensure
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/death/spawn.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/death/spawn.mcfunction
+new file mode 100644
+index 0000000..9515bc9
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/death/spawn.mcfunction	
+@@ -0,0 +1,2 @@
++#ドロップ品。通常の拾得は無効にし、ゲリラ兵だけが drop/pickup で拾う
++$summon item $(x) $(y) $(z) {Item:{id:"$(item)",count:1,components:{"minecraft:custom_name":{text:"$(name)",color:"gold",italic:false},"minecraft:custom_data":{gu_drop:"$(kind)"}}},PickupDelay:32767s,Glowing:1b,Tags:["GuDrop"]}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/death/store_pos.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/death/store_pos.mcfunction
+new file mode 100644
+index 0000000..3098151
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/death/store_pos.mcfunction	
+@@ -0,0 +1,3 @@
++execute store result score @s GuPX run data get entity @s Pos[0] 10
++execute store result score @s GuPY run data get entity @s Pos[1] 10
++execute store result score @s GuPZ run data get entity @s Pos[2] 10
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/get_ak.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/get_ak.mcfunction
+new file mode 100644
+index 0000000..c4d8676
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/get_ak.mcfunction	
+@@ -0,0 +1,8 @@
++#すでに持っている場合は予備マガジン+1
++execute if score @s GuHasAk matches 1 run return run function main:pvp/guerrilla/drop/mag_ak
++scoreboard players set @s GuHasAk 1
++scoreboard players set @s GuAmmoAk 30
++scoreboard players set @s GuMagAk 0
++function main:pvp/guerrilla/item/give_ak
++playsound minecraft:item.armor.equip_iron player @a ~ ~ ~ 1 1.2
++tellraw @s {text:"AK47を手に入れた",color:"gold"}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/get_gl.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/get_gl.mcfunction
+new file mode 100644
+index 0000000..669dfb0
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/get_gl.mcfunction	
+@@ -0,0 +1,8 @@
++#すでに持っている場合は予備マガジン+1
++execute if score @s GuHasGl matches 1 run return run function main:pvp/guerrilla/drop/mag_gl
++scoreboard players set @s GuHasGl 1
++scoreboard players set @s GuAmmoGl 35
++scoreboard players set @s GuMagGl 0
++function main:pvp/guerrilla/item/give_gl
++playsound minecraft:item.armor.equip_iron player @a ~ ~ ~ 1 1.2
++tellraw @s {text:"Garillを手に入れた",color:"gold"}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/get_gren.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/get_gren.mcfunction
+new file mode 100644
+index 0000000..fe74d90
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/get_gren.mcfunction	
+@@ -0,0 +1,2 @@
++function main:pvp/guerrilla/item/give_gren
++playsound minecraft:item.armor.equip_iron player @a ~ ~ ~ 1 1.2
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/get_p90.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/get_p90.mcfunction
+new file mode 100644
+index 0000000..9397e16
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/get_p90.mcfunction	
+@@ -0,0 +1,8 @@
++#すでに持っている場合は予備マガジン+1
++execute if score @s GuHasP90 matches 1 run return run function main:pvp/guerrilla/drop/mag_p90
++scoreboard players set @s GuHasP90 1
++scoreboard players set @s GuAmmoP90 50
++scoreboard players set @s GuMagP90 0
++function main:pvp/guerrilla/item/give_p90
++playsound minecraft:item.armor.equip_iron player @a ~ ~ ~ 1 1.2
++tellraw @s {text:"SMG（P90）を手に入れた",color:"gold"}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/get_rv.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/get_rv.mcfunction
+new file mode 100644
+index 0000000..2a2e18e
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/get_rv.mcfunction	
+@@ -0,0 +1,8 @@
++#すでに持っている場合は予備マガジン+1
++execute if score @s GuHasRv matches 1 run return run function main:pvp/guerrilla/drop/mag_rv
++scoreboard players set @s GuHasRv 1
++scoreboard players set @s GuAmmoRv 6
++scoreboard players set @s GuMagRv 0
++function main:pvp/guerrilla/item/give_rv
++playsound minecraft:item.armor.equip_iron player @a ~ ~ ~ 1 1.2
++tellraw @s {text:"リボルバーを手に入れた",color:"gold"}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/get_skull.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/get_skull.mcfunction
+new file mode 100644
+index 0000000..cf3e043
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/get_skull.mcfunction	
+@@ -0,0 +1,6 @@
++scoreboard players add @s GuSkull 1
++#ボーナス：頭蓋骨を拾うごとにカロリーメイト（金リンゴ）
++give @s minecraft:golden_apple[custom_name={text:"カロリーメイト",color:"yellow",italic:false},custom_data={gu_item:1b}] 1
++playsound minecraft:entity.skeleton.ambient player @a ~ ~ ~ 1 0.6
++tellraw @s [{text:"頭蓋骨を回収した（",color:"gray"},{score:{name:"@s",objective:"GuSkull"},color:"white"},{text:"個）",color:"gray"}]
++function main:pvp/guerrilla/reward/check
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/get_tec.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/get_tec.mcfunction
+new file mode 100644
+index 0000000..c023fa6
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/get_tec.mcfunction	
+@@ -0,0 +1,8 @@
++#すでに持っている場合は予備マガジン+1
++execute if score @s GuHasTec matches 1 run return run function main:pvp/guerrilla/drop/mag_tec
++scoreboard players set @s GuHasTec 1
++scoreboard players set @s GuAmmoTec 20
++scoreboard players set @s GuMagTec 0
++function main:pvp/guerrilla/item/give_tec
++playsound minecraft:item.armor.equip_iron player @a ~ ~ ~ 1 1.2
++tellraw @s {text:"オートピストル（Tec9）を手に入れた",color:"gold"}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/give.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/give.mcfunction
+new file mode 100644
+index 0000000..612b28b
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/give.mcfunction	
+@@ -0,0 +1 @@
++$function main:pvp/guerrilla/drop/get_$(kind)
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/mag_ak.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/mag_ak.mcfunction
+new file mode 100644
+index 0000000..51efe37
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/mag_ak.mcfunction	
+@@ -0,0 +1,3 @@
++scoreboard players add @s GuMagAk 1
++playsound minecraft:item.armor.equip_chain player @a ~ ~ ~ 1 1.4
++tellraw @s {text:"AK47のマガジン+1",color:"gold"}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/mag_gl.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/mag_gl.mcfunction
+new file mode 100644
+index 0000000..45cbc19
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/mag_gl.mcfunction	
+@@ -0,0 +1,3 @@
++scoreboard players add @s GuMagGl 1
++playsound minecraft:item.armor.equip_chain player @a ~ ~ ~ 1 1.4
++tellraw @s {text:"Garillのマガジン+1",color:"gold"}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/mag_p90.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/mag_p90.mcfunction
+new file mode 100644
+index 0000000..924747b
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/mag_p90.mcfunction	
+@@ -0,0 +1,3 @@
++scoreboard players add @s GuMagP90 1
++playsound minecraft:item.armor.equip_chain player @a ~ ~ ~ 1 1.4
++tellraw @s {text:"SMG（P90）のマガジン+1",color:"gold"}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/mag_rv.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/mag_rv.mcfunction
+new file mode 100644
+index 0000000..922f437
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/mag_rv.mcfunction	
+@@ -0,0 +1,3 @@
++scoreboard players add @s GuMagRv 1
++playsound minecraft:item.armor.equip_chain player @a ~ ~ ~ 1 1.4
++tellraw @s {text:"リボルバーのマガジン+1",color:"gold"}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/mag_tec.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/mag_tec.mcfunction
+new file mode 100644
+index 0000000..ebb40f5
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/mag_tec.mcfunction	
+@@ -0,0 +1,3 @@
++scoreboard players add @s GuMagTec 1
++playsound minecraft:item.armor.equip_chain player @a ~ ~ ~ 1 1.4
++tellraw @s {text:"オートピストル（Tec9）のマガジン+1",color:"gold"}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/pickup.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/pickup.mcfunction
+new file mode 100644
+index 0000000..75aec44
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/pickup.mcfunction	
+@@ -0,0 +1,4 @@
++#実行者：ドロップ品の近くにいるゲリラ兵
++tag @s add GuPicker
++execute as @e[type=item,tag=GuDrop,distance=..1.5] run function main:pvp/guerrilla/drop/pickup_item
++tag @s remove GuPicker
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/pickup_item.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/pickup_item.mcfunction
+new file mode 100644
+index 0000000..a77338e
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/drop/pickup_item.mcfunction	
+@@ -0,0 +1,4 @@
++#実行者：ドロップ品
++data modify storage main:guerrilla pick.kind set from entity @s Item.components."minecraft:custom_data".gu_drop
++execute as @a[tag=GuPicker,limit=1] at @s run function main:pvp/guerrilla/drop/give with storage main:guerrilla pick
++kill @s
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/fx/explode.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/fx/explode.mcfunction
+new file mode 100644
+index 0000000..3700c83
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/fx/explode.mcfunction	
+@@ -0,0 +1,9 @@
++#敵チームだけに効く爆発（実行者：GuID とチームtag を持つentity）
++tag @a remove GuSrc
++scoreboard players operation #id GuCalc = @s GuID
++execute as @a[tag=Guerrilla] if score @s GuID = #id GuCalc run tag @s add GuSrc
++particle minecraft:explosion_emitter ~ ~ ~ 0 0 0 0 1 force
++playsound minecraft:entity.generic.explode player @a ~ ~ ~ 4 0.8
++$execute if entity @s[tag=GuBlue] as @a[team=Red,gamemode=!spectator,distance=..$(r)] run function main:pvp/guerrilla/fx/explode_hit {d:$(d)}
++$execute if entity @s[tag=GuRed] as @a[team=Blue,gamemode=!spectator,distance=..$(r)] run function main:pvp/guerrilla/fx/explode_hit {d:$(d)}
++tag @a remove GuSrc
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/fx/explode_hit.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/fx/explode_hit.mcfunction
+new file mode 100644
+index 0000000..1b520ca
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/fx/explode_hit.mcfunction	
+@@ -0,0 +1,3 @@
++scoreboard players set @s GuAssist 140
++$execute if entity @a[tag=GuSrc] run damage @s $(d) main:gu_explosion by @a[tag=GuSrc,limit=1]
++$execute unless entity @a[tag=GuSrc] run damage @s $(d) main:gu_explosion
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/guerrilla.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/guerrilla.mcfunction
+new file mode 100644
+index 0000000..adaffda
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/guerrilla.mcfunction	
+@@ -0,0 +1,29 @@
++#上級ゲリラ兵 毎tick処理（pvp/pvp_control から呼ばれる）
++
++#プレイヤーごとの処理（入力・しゃがみ・射撃・表示）
++execute as @a[tag=Guerrilla] at @s run function main:pvp/guerrilla/player_tick
++
++#ゲリラ兵に攻撃された敵の記録（アシスト7秒・死亡位置）
++scoreboard players remove @a[scores={GuAssist=1..}] GuAssist 1
++execute as @a[scores={GuAssist=1..}] run function main:pvp/guerrilla/death/store_pos
++
++#死亡処理（頭蓋骨・武器のドロップ、ゲリラ兵自身の所持品消滅）
++execute as @a[scores={GuDeath=1..}] run function main:pvp/guerrilla/death/process
++scoreboard players set @a[scores={GuKill=1..}] GuKill 0
++
++#ドロップ品の拾得（ゲリラ兵のみ）
++execute as @a[tag=Guerrilla,gamemode=!spectator] at @s if entity @e[type=item,tag=GuDrop,distance=..1.5] run function main:pvp/guerrilla/drop/pickup
++
++#投擲物・爆撃
++execute as @e[type=snowball,tag=!GuSeen] at @s run function main:pvp/guerrilla/projectile/scan_snowball
++execute as @e[type=arrow,tag=!GuSeen] at @s run function main:pvp/guerrilla/projectile/scan_arrow
++execute as @e[type=marker,tag=GuNadeM] at @s run function main:pvp/guerrilla/projectile/nade_tick
++execute as @e[type=marker,tag=GuArrowM] at @s run function main:pvp/guerrilla/projectile/arrow_tick
++execute as @e[type=marker,tag=GuStrike] at @s run function main:pvp/guerrilla/reward/strike_tick
++execute as @e[type=marker,tag=GuCarpet] at @s run function main:pvp/guerrilla/reward/carpet_tick
++execute as @e[type=creeper,tag=GuBomb] at @s run function main:pvp/guerrilla/reward/bomb_tick
++execute if score #nuke GuCalc matches 1.. run function main:pvp/guerrilla/reward/nuke_tick
++
++#1秒ごとの整理（初期装備の維持・捨てた装備の削除）
++scoreboard players add #slow GuCalc 1
++execute if score #slow GuCalc matches 20.. run function main:pvp/guerrilla/slow
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/damage.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/damage.mcfunction
+new file mode 100644
+index 0000000..953a06c
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/damage.mcfunction	
+@@ -0,0 +1 @@
++$damage @s $(amount) main:gu_bullet by @a[tag=GuShooter,limit=1]
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/fire.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/fire.mcfunction
+new file mode 100644
+index 0000000..cd3116a
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/fire.mcfunction	
+@@ -0,0 +1,9 @@
++#弾を撃つ（実行者：射手。storage main:guerrilla shot の n/dmg/hs/steps/pellets を使う）
++tag @s add GuShooter
++scoreboard players set #team GuCalc 0
++execute if entity @s[team=Blue] run scoreboard players set #team GuCalc 1
++execute if entity @s[team=Red] run scoreboard players set #team GuCalc 2
++execute store result score #pel GuCalc run data get storage main:guerrilla shot.pellets
++execute anchored eyes positioned ^ ^ ^ run function main:pvp/guerrilla/gun/pellet_loop
++execute anchored eyes positioned ^ ^-0.1 ^0.6 run particle minecraft:smoke ~ ~ ~ 0.02 0.02 0.02 0.01 2
++tag @s remove GuShooter
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/headshot.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/headshot.mcfunction
+new file mode 100644
+index 0000000..eb7a12b
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/headshot.mcfunction	
+@@ -0,0 +1,3 @@
++data modify storage main:guerrilla hit.amount set from storage main:guerrilla shot.hs
++playsound minecraft:entity.arrow.hit_player player @a[tag=GuShooter] ~ ~ ~ 1 1.4
++particle minecraft:crit ~ ~ ~ 0.1 0.1 0.1 0.2 6
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/held.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/held.mcfunction
+new file mode 100644
+index 0000000..7095e2e
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/held.mcfunction	
+@@ -0,0 +1,10 @@
++#実行者：右クリック中のゲリラ兵。手に持っている物で振り分ける
++execute if items entity @s weapon.mainhand *[minecraft:custom_data~{gu:"sg"}] run return run function main:pvp/guerrilla/gun/w/sg
++execute if items entity @s weapon.mainhand *[minecraft:custom_data~{gu:"ak"}] run return run function main:pvp/guerrilla/gun/w/ak
++execute if items entity @s weapon.mainhand *[minecraft:custom_data~{gu:"gl"}] run return run function main:pvp/guerrilla/gun/w/gl
++execute if items entity @s weapon.mainhand *[minecraft:custom_data~{gu:"p90"}] run return run function main:pvp/guerrilla/gun/w/p90
++execute if items entity @s weapon.mainhand *[minecraft:custom_data~{gu:"tec"}] run return run function main:pvp/guerrilla/gun/w/tec
++execute if items entity @s weapon.mainhand *[minecraft:custom_data~{gu:"rv"}] run return run function main:pvp/guerrilla/gun/w/rv
++execute if score @s GuPress matches 1 if items entity @s weapon.mainhand *[minecraft:custom_data~{gu:"uav"}] run return run function main:pvp/guerrilla/reward/uav_use
++execute if score @s GuPress matches 1 if items entity @s weapon.mainhand *[minecraft:custom_data~{gu:"carpet"}] run return run function main:pvp/guerrilla/reward/carpet_use
++execute if score @s GuPress matches 1 if items entity @s weapon.mainhand *[minecraft:custom_data~{gu:"nuke"}] run return run function main:pvp/guerrilla/reward/nuke_use
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/hit.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/hit.mcfunction
+new file mode 100644
+index 0000000..026a8fa
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/hit.mcfunction	
+@@ -0,0 +1,9 @@
++#実行者：被弾した敵 / 位置：着弾点
++scoreboard players set #hit GuCalc 1
++data modify storage main:guerrilla hit.amount set from storage main:guerrilla shot.dmg
++summon marker ~ ~ ~ {Tags:["GuHitPt"]}
++execute at @s anchored eyes positioned ^ ^ ^ if entity @e[type=marker,tag=GuHitPt,distance=..0.45] run function main:pvp/guerrilla/gun/headshot
++kill @e[type=marker,tag=GuHitPt]
++function main:pvp/guerrilla/gun/damage with storage main:guerrilla hit
++scoreboard players set @s GuAssist 140
++playsound minecraft:block.note_block.hat player @a[tag=GuShooter] ~ ~ ~ 0.6 1.6
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/pellet_loop.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/pellet_loop.mcfunction
+new file mode 100644
+index 0000000..7902022
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/pellet_loop.mcfunction	
+@@ -0,0 +1,3 @@
++function main:pvp/guerrilla/gun/pellet_rand with storage main:guerrilla shot
++scoreboard players remove #pel GuCalc 1
++execute if score #pel GuCalc matches 1.. run function main:pvp/guerrilla/gun/pellet_loop
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/pellet_rand.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/pellet_rand.mcfunction
+new file mode 100644
+index 0000000..1a0bc73
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/pellet_rand.mcfunction	
+@@ -0,0 +1,4 @@
++#上下左右それぞれ ±n/100 度のランダムなずれ（四角形の拡散）
++$execute store result storage main:guerrilla rot.y double 0.01 run random value -$(n)..$(n)
++$execute store result storage main:guerrilla rot.p double 0.01 run random value -$(n)..$(n)
++function main:pvp/guerrilla/gun/pellet_rot with storage main:guerrilla rot
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/pellet_rot.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/pellet_rot.mcfunction
+new file mode 100644
+index 0000000..cd9ec54
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/pellet_rot.mcfunction	
+@@ -0,0 +1 @@
++$execute rotated ~$(y) ~$(p) run function main:pvp/guerrilla/gun/ray_start
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/ray.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/ray.mcfunction
+new file mode 100644
+index 0000000..7523552
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/ray.mcfunction	
+@@ -0,0 +1,10 @@
++#0.25ブロックずつ進むレイキャスト。敵プレイヤーの当たり判定内に入ったら命中
++execute if score #team GuCalc matches 1 as @a[team=Red,gamemode=!spectator,distance=..2] positioned ~-0.99 ~-0.99 ~-0.99 if entity @s[dx=0,dy=0,dz=0] positioned ~0.99 ~0.99 ~0.99 if entity @s[dx=0,dy=0,dz=0] run function main:pvp/guerrilla/gun/hit
++execute if score #team GuCalc matches 2 as @a[team=Blue,gamemode=!spectator,distance=..2] positioned ~-0.99 ~-0.99 ~-0.99 if entity @s[dx=0,dy=0,dz=0] positioned ~0.99 ~0.99 ~0.99 if entity @s[dx=0,dy=0,dz=0] run function main:pvp/guerrilla/gun/hit
++execute if score #hit GuCalc matches 1 run return 0
++#曳光（2ブロックごと）
++scoreboard players add #tr GuCalc 1
++execute if score #tr GuCalc matches 8.. run particle minecraft:crit ~ ~ ~ 0 0 0 0 1
++execute if score #tr GuCalc matches 8.. run scoreboard players set #tr GuCalc 0
++scoreboard players remove #steps GuCalc 1
++execute if score #steps GuCalc matches 1.. positioned ^ ^ ^0.25 if block ~ ~ ~ #main:gu_passable run function main:pvp/guerrilla/gun/ray
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/ray_start.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/ray_start.mcfunction
+new file mode 100644
+index 0000000..4138fd5
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/ray_start.mcfunction	
+@@ -0,0 +1,4 @@
++execute store result score #steps GuCalc run data get storage main:guerrilla shot.steps
++scoreboard players set #hit GuCalc 0
++scoreboard players set #tr GuCalc 0
++function main:pvp/guerrilla/gun/ray
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/ak.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/ak.mcfunction
+new file mode 100644
+index 0000000..48f6b33
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/ak.mcfunction	
+@@ -0,0 +1,6 @@
++#AK47 リロード開始（予備マガジンを1つ使う）
++execute if score @s GuReload matches 1.. run return 0
++execute unless score @s GuMagAk matches 1.. run return run playsound minecraft:block.dispenser.fail player @s ~ ~ ~ 0.5 2
++scoreboard players set @s GuReloadW 2
++scoreboard players set @s GuReload 40
++playsound minecraft:item.crossbow.loading_start player @a ~ ~ ~ 0.8 1.2
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/done_ak.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/done_ak.mcfunction
+new file mode 100644
+index 0000000..5b2f6f7
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/done_ak.mcfunction	
+@@ -0,0 +1,2 @@
++scoreboard players set @s GuAmmoAk 30
++scoreboard players remove @s GuMagAk 1
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/done_gl.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/done_gl.mcfunction
+new file mode 100644
+index 0000000..7b7f5f2
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/done_gl.mcfunction	
+@@ -0,0 +1,2 @@
++scoreboard players set @s GuAmmoGl 35
++scoreboard players remove @s GuMagGl 1
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/done_p90.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/done_p90.mcfunction
+new file mode 100644
+index 0000000..2312218
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/done_p90.mcfunction	
+@@ -0,0 +1,2 @@
++scoreboard players set @s GuAmmoP90 50
++scoreboard players remove @s GuMagP90 1
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/done_rv.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/done_rv.mcfunction
+new file mode 100644
+index 0000000..9a1ad9e
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/done_rv.mcfunction	
+@@ -0,0 +1,2 @@
++scoreboard players set @s GuAmmoRv 6
++scoreboard players remove @s GuMagRv 1
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/done_tec.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/done_tec.mcfunction
+new file mode 100644
+index 0000000..e6c9459
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/done_tec.mcfunction	
+@@ -0,0 +1,2 @@
++scoreboard players set @s GuAmmoTec 20
++scoreboard players remove @s GuMagTec 1
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/gl.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/gl.mcfunction
+new file mode 100644
+index 0000000..3458792
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/gl.mcfunction	
+@@ -0,0 +1,6 @@
++#Garill リロード開始（予備マガジンを1つ使う）
++execute if score @s GuReload matches 1.. run return 0
++execute unless score @s GuMagGl matches 1.. run return run playsound minecraft:block.dispenser.fail player @s ~ ~ ~ 0.5 2
++scoreboard players set @s GuReloadW 3
++scoreboard players set @s GuReload 40
++playsound minecraft:item.crossbow.loading_start player @a ~ ~ ~ 0.8 1.2
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/p90.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/p90.mcfunction
+new file mode 100644
+index 0000000..dcc2e4c
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/p90.mcfunction	
+@@ -0,0 +1,6 @@
++#SMG（P90） リロード開始（予備マガジンを1つ使う）
++execute if score @s GuReload matches 1.. run return 0
++execute unless score @s GuMagP90 matches 1.. run return run playsound minecraft:block.dispenser.fail player @s ~ ~ ~ 0.5 2
++scoreboard players set @s GuReloadW 4
++scoreboard players set @s GuReload 50
++playsound minecraft:item.crossbow.loading_start player @a ~ ~ ~ 0.8 1.2
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/rv.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/rv.mcfunction
+new file mode 100644
+index 0000000..0857b51
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/rv.mcfunction	
+@@ -0,0 +1,6 @@
++#リボルバー リロード開始（予備マガジンを1つ使う）
++execute if score @s GuReload matches 1.. run return 0
++execute unless score @s GuMagRv matches 1.. run return run playsound minecraft:block.dispenser.fail player @s ~ ~ ~ 0.5 2
++scoreboard players set @s GuReloadW 6
++scoreboard players set @s GuReload 50
++playsound minecraft:item.crossbow.loading_start player @a ~ ~ ~ 0.8 1.2
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/sg.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/sg.mcfunction
+new file mode 100644
+index 0000000..b1d0f54
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/sg.mcfunction	
+@@ -0,0 +1,5 @@
++#ショットガン リロード開始（予備弾無制限）
++execute if score @s GuReload matches 1.. run return 0
++scoreboard players set @s GuReloadW 1
++scoreboard players set @s GuReload 30
++playsound minecraft:item.crossbow.loading_start player @a ~ ~ ~ 0.8 1.2
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/tec.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/tec.mcfunction
+new file mode 100644
+index 0000000..dd5258b
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload/tec.mcfunction	
+@@ -0,0 +1,6 @@
++#オートピストル（Tec9） リロード開始（予備マガジンを1つ使う）
++execute if score @s GuReload matches 1.. run return 0
++execute unless score @s GuMagTec matches 1.. run return run playsound minecraft:block.dispenser.fail player @s ~ ~ ~ 0.5 2
++scoreboard players set @s GuReloadW 5
++scoreboard players set @s GuReload 30
++playsound minecraft:item.crossbow.loading_start player @a ~ ~ ~ 0.8 1.2
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload_tick.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload_tick.mcfunction
+new file mode 100644
+index 0000000..bd4f8eb
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/reload_tick.mcfunction	
+@@ -0,0 +1,11 @@
++#リロード中（実行者：ゲリラ兵）
++scoreboard players remove @s GuReload 1
++execute if score @s GuReload matches 1.. run return 0
++execute if score @s GuReloadW matches 1 run scoreboard players set @s GuAmmoSg 5
++execute if score @s GuReloadW matches 2 run function main:pvp/guerrilla/gun/reload/done_ak
++execute if score @s GuReloadW matches 3 run function main:pvp/guerrilla/gun/reload/done_gl
++execute if score @s GuReloadW matches 4 run function main:pvp/guerrilla/gun/reload/done_p90
++execute if score @s GuReloadW matches 5 run function main:pvp/guerrilla/gun/reload/done_tec
++execute if score @s GuReloadW matches 6 run function main:pvp/guerrilla/gun/reload/done_rv
++scoreboard players set @s GuReloadW 0
++playsound minecraft:item.crossbow.loading_end player @a ~ ~ ~ 0.8 1.2
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/shoot/ak.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/shoot/ak.mcfunction
+new file mode 100644
+index 0000000..1b33187
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/shoot/ak.mcfunction	
+@@ -0,0 +1,11 @@
++#AK47 1発分
++scoreboard players remove @s GuAmmoAk 1
++#拡散角（片側・度×100）：しゃがみ / 通常 / 移動倍率×10
++scoreboard players set #sc GuCalc 571
++scoreboard players set #ss GuCalc 853
++scoreboard players set #mm GuCalc 40
++function main:pvp/guerrilla/gun/spread
++data modify storage main:guerrilla shot merge value {dmg:3,hs:6,steps:160,pellets:1}
++function main:pvp/guerrilla/gun/fire
++playsound minecraft:entity.firework_rocket.blast player @a ~ ~ ~ 0.7 1.6
++execute if score @s GuAmmoAk matches ..0 run function main:pvp/guerrilla/gun/reload/ak
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/shoot/gl.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/shoot/gl.mcfunction
+new file mode 100644
+index 0000000..2821e23
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/shoot/gl.mcfunction	
+@@ -0,0 +1,11 @@
++#Garill 1発分
++scoreboard players remove @s GuAmmoGl 1
++#拡散角（片側・度×100）：しゃがみ / 通常 / 移動倍率×10
++scoreboard players set #sc GuCalc 571
++scoreboard players set #ss GuCalc 853
++scoreboard players set #mm GuCalc 40
++function main:pvp/guerrilla/gun/spread
++data modify storage main:guerrilla shot merge value {dmg:3,hs:4,steps:160,pellets:1}
++function main:pvp/guerrilla/gun/fire
++playsound minecraft:entity.firework_rocket.blast player @a ~ ~ ~ 0.7 1.3
++execute if score @s GuAmmoGl matches ..0 run function main:pvp/guerrilla/gun/reload/gl
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/shoot/p90.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/shoot/p90.mcfunction
+new file mode 100644
+index 0000000..3c3be79
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/shoot/p90.mcfunction	
+@@ -0,0 +1,11 @@
++#SMG（P90） 1発分
++scoreboard players remove @s GuAmmoP90 1
++#拡散角（片側・度×100）：しゃがみ / 通常 / 移動倍率×10
++scoreboard players set #sc GuCalc 571
++scoreboard players set #ss GuCalc 1131
++scoreboard players set #mm GuCalc 15
++function main:pvp/guerrilla/gun/spread
++data modify storage main:guerrilla shot merge value {dmg:2,hs:2,steps:160,pellets:1}
++function main:pvp/guerrilla/gun/fire
++playsound minecraft:entity.firework_rocket.blast player @a ~ ~ ~ 0.5 2.0
++execute if score @s GuAmmoP90 matches ..0 run function main:pvp/guerrilla/gun/reload/p90
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/shoot/rv.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/shoot/rv.mcfunction
+new file mode 100644
+index 0000000..c88f856
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/shoot/rv.mcfunction	
+@@ -0,0 +1,11 @@
++#リボルバー 1発分
++scoreboard players remove @s GuAmmoRv 1
++#拡散角（片側・度×100）：しゃがみ / 通常 / 移動倍率×10
++scoreboard players set #sc GuCalc 286
++scoreboard players set #ss GuCalc 286
++scoreboard players set #mm GuCalc 40
++function main:pvp/guerrilla/gun/spread
++data modify storage main:guerrilla shot merge value {dmg:8,hs:15,steps:160,pellets:1}
++function main:pvp/guerrilla/gun/fire
++playsound minecraft:entity.generic.explode player @a ~ ~ ~ 0.5 2.0
++execute if score @s GuAmmoRv matches ..0 run function main:pvp/guerrilla/gun/reload/rv
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/shoot/sg.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/shoot/sg.mcfunction
+new file mode 100644
+index 0000000..5d2512d
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/shoot/sg.mcfunction	
+@@ -0,0 +1,11 @@
++#ショットガン 1発分
++scoreboard players remove @s GuAmmoSg 1
++#拡散角（片側・度×100）：しゃがみ / 通常 / 移動倍率×10
++scoreboard players set #sc GuCalc 1131
++scoreboard players set #ss GuCalc 2180
++scoreboard players set #mm GuCalc 20
++function main:pvp/guerrilla/gun/spread
++data modify storage main:guerrilla shot merge value {dmg:2,hs:3,steps:80,pellets:10}
++function main:pvp/guerrilla/gun/fire
++playsound minecraft:entity.generic.explode player @a ~ ~ ~ 0.6 1.8
++execute if score @s GuAmmoSg matches ..0 run function main:pvp/guerrilla/gun/reload/sg
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/shoot/tec.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/shoot/tec.mcfunction
+new file mode 100644
+index 0000000..61f81ca
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/shoot/tec.mcfunction	
+@@ -0,0 +1,11 @@
++#オートピストル（Tec9） 1発分
++scoreboard players remove @s GuAmmoTec 1
++#拡散角（片側・度×100）：しゃがみ / 通常 / 移動倍率×10
++scoreboard players set #sc GuCalc 571
++scoreboard players set #ss GuCalc 571
++scoreboard players set #mm GuCalc 10
++function main:pvp/guerrilla/gun/spread
++data modify storage main:guerrilla shot merge value {dmg:2,hs:3,steps:160,pellets:1}
++function main:pvp/guerrilla/gun/fire
++playsound minecraft:entity.firework_rocket.blast player @a ~ ~ ~ 0.5 1.8
++execute if score @s GuAmmoTec matches ..0 run function main:pvp/guerrilla/gun/reload/tec
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/spread.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/spread.mcfunction
+new file mode 100644
+index 0000000..84609ba
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/spread.mcfunction	
+@@ -0,0 +1,7 @@
++##sc/#ss/#mm から拡散角を決めて shot.n に入れる（実行者：射手）
++scoreboard players operation #n GuCalc = #ss GuCalc
++execute if predicate main:is_sneaking run scoreboard players operation #n GuCalc = #sc GuCalc
++execute if score @s GuMove matches 1.. run scoreboard players operation #n GuCalc *= #mm GuCalc
++execute if score @s GuMove matches 1.. run scoreboard players operation #n GuCalc /= #10 GuCalc
++execute if score #n GuCalc matches ..0 run scoreboard players set #n GuCalc 1
++execute store result storage main:guerrilla shot.n int 1 run scoreboard players get #n GuCalc
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/w/ak.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/w/ak.mcfunction
+new file mode 100644
+index 0000000..9170196
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/w/ak.mcfunction	
+@@ -0,0 +1,9 @@
++#AK47：連射RPM600・3/HS6・10mで しゃがみ2/通常3・移動4倍（弾数30は仮）
++#RPM：毎tick RPM を加算し、1200 を超えるごとに1発（20tick × 60秒 = 1200）
++execute if score @s GuReload matches 1.. if score @s GuReloadW matches 2 run return 0
++execute if score @s GuPress matches 1 run scoreboard players set @s GuRate 600
++scoreboard players add @s GuRate 600
++execute unless score @s GuRate matches 1200.. run return 0
++scoreboard players remove @s GuRate 1200
++execute if score @s GuAmmoAk matches ..0 run return run function main:pvp/guerrilla/gun/reload/ak
++function main:pvp/guerrilla/gun/shoot/ak
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/w/gl.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/w/gl.mcfunction
+new file mode 100644
+index 0000000..102f470
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/w/gl.mcfunction	
+@@ -0,0 +1,9 @@
++#Garill：連射RPM500・3/HS4・10mで しゃがみ2/通常3・移動4倍（弾数35は仮）
++#RPM：毎tick RPM を加算し、1200 を超えるごとに1発（20tick × 60秒 = 1200）
++execute if score @s GuReload matches 1.. if score @s GuReloadW matches 3 run return 0
++execute if score @s GuPress matches 1 run scoreboard players set @s GuRate 700
++scoreboard players add @s GuRate 500
++execute unless score @s GuRate matches 1200.. run return 0
++scoreboard players remove @s GuRate 1200
++execute if score @s GuAmmoGl matches ..0 run return run function main:pvp/guerrilla/gun/reload/gl
++function main:pvp/guerrilla/gun/shoot/gl
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/w/p90.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/w/p90.mcfunction
+new file mode 100644
+index 0000000..9613160
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/w/p90.mcfunction	
+@@ -0,0 +1,9 @@
++#SMG（P90）：連射RPM960・2/HS2・10mで しゃがみ2/通常4・移動1.5倍（弾数50は仮）
++#RPM：毎tick RPM を加算し、1200 を超えるごとに1発（20tick × 60秒 = 1200）
++execute if score @s GuReload matches 1.. if score @s GuReloadW matches 4 run return 0
++execute if score @s GuPress matches 1 run scoreboard players set @s GuRate 240
++scoreboard players add @s GuRate 960
++execute unless score @s GuRate matches 1200.. run return 0
++scoreboard players remove @s GuRate 1200
++execute if score @s GuAmmoP90 matches ..0 run return run function main:pvp/guerrilla/gun/reload/p90
++function main:pvp/guerrilla/gun/shoot/p90
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/w/rv.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/w/rv.mcfunction
+new file mode 100644
+index 0000000..d6bf092
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/w/rv.mcfunction	
+@@ -0,0 +1,7 @@
++#リボルバー：単発RPM267・6発・8/HS15・10mで1×1（しゃがんでも同じ）・移動4倍
++execute unless score @s GuPress matches 1 run return 0
++execute if score @s GuCool matches 1.. run return 0
++execute if score @s GuReload matches 1.. if score @s GuReloadW matches 6 run return 0
++execute if score @s GuAmmoRv matches ..0 run return run function main:pvp/guerrilla/gun/reload/rv
++scoreboard players set @s GuCool 5
++function main:pvp/guerrilla/gun/shoot/rv
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/w/sg.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/w/sg.mcfunction
+new file mode 100644
+index 0000000..398a4e0
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/w/sg.mcfunction	
+@@ -0,0 +1,7 @@
++#ショットガン：単発・RPM70・5発・10粒・1粒2/HS3・5mで しゃがみ2/通常4・移動2倍
++execute unless score @s GuPress matches 1 run return 0
++execute if score @s GuCool matches 1.. run return 0
++execute if score @s GuReload matches 1.. if score @s GuReloadW matches 1 run return 0
++execute if score @s GuAmmoSg matches ..0 run return run function main:pvp/guerrilla/gun/reload/sg
++scoreboard players set @s GuCool 17
++function main:pvp/guerrilla/gun/shoot/sg
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/w/tec.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/w/tec.mcfunction
+new file mode 100644
+index 0000000..c9f0f55
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/gun/w/tec.mcfunction	
+@@ -0,0 +1,7 @@
++#オートピストル（Tec9）：単発RPM400・移動で精度低下なし（ダメージ2/HS3・拡散2・弾数20は仮）
++execute unless score @s GuPress matches 1 run return 0
++execute if score @s GuCool matches 1.. run return 0
++execute if score @s GuReload matches 1.. if score @s GuReloadW matches 5 run return 0
++execute if score @s GuAmmoTec matches ..0 run return run function main:pvp/guerrilla/gun/reload/tec
++scoreboard players set @s GuCool 3
++function main:pvp/guerrilla/gun/shoot/tec
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/hud.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/hud.mcfunction
+new file mode 100644
+index 0000000..cfc15c2
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/hud.mcfunction	
+@@ -0,0 +1,9 @@
++#アクションバー表示（実行者：ゲリラ兵）
++execute if score @s GuReload matches 1.. run return run title @s actionbar [{text:"リロード中…  ",color:"yellow"},{text:"頭蓋骨 ",color:"gray"},{score:{name:"@s",objective:"GuSkull"},color:"white"}]
++execute if items entity @s weapon.mainhand *[minecraft:custom_data~{gu:"sg"}] run return run title @s actionbar [{text:"ショットガン ",color:"gold"},{score:{name:"@s",objective:"GuAmmoSg"},color:"white"},{text:"/5",color:"gray"},{text:"  頭蓋骨 ",color:"gray"},{score:{name:"@s",objective:"GuSkull"},color:"white"}]
++execute if items entity @s weapon.mainhand *[minecraft:custom_data~{gu:"ak"}] run return run title @s actionbar [{text:"AK47 ",color:"gold"},{score:{name:"@s",objective:"GuAmmoAk"},color:"white"},{text:"/30",color:"gray"},{text:"  予備",color:"gray"},{score:{name:"@s",objective:"GuMagAk"},color:"white"},{text:"  頭蓋骨 ",color:"gray"},{score:{name:"@s",objective:"GuSkull"},color:"white"}]
++execute if items entity @s weapon.mainhand *[minecraft:custom_data~{gu:"gl"}] run return run title @s actionbar [{text:"Garill ",color:"gold"},{score:{name:"@s",objective:"GuAmmoGl"},color:"white"},{text:"/35",color:"gray"},{text:"  予備",color:"gray"},{score:{name:"@s",objective:"GuMagGl"},color:"white"},{text:"  頭蓋骨 ",color:"gray"},{score:{name:"@s",objective:"GuSkull"},color:"white"}]
++execute if items entity @s weapon.mainhand *[minecraft:custom_data~{gu:"p90"}] run return run title @s actionbar [{text:"SMG（P90） ",color:"gold"},{score:{name:"@s",objective:"GuAmmoP90"},color:"white"},{text:"/50",color:"gray"},{text:"  予備",color:"gray"},{score:{name:"@s",objective:"GuMagP90"},color:"white"},{text:"  頭蓋骨 ",color:"gray"},{score:{name:"@s",objective:"GuSkull"},color:"white"}]
++execute if items entity @s weapon.mainhand *[minecraft:custom_data~{gu:"tec"}] run return run title @s actionbar [{text:"オートピストル（Tec9） ",color:"gold"},{score:{name:"@s",objective:"GuAmmoTec"},color:"white"},{text:"/20",color:"gray"},{text:"  予備",color:"gray"},{score:{name:"@s",objective:"GuMagTec"},color:"white"},{text:"  頭蓋骨 ",color:"gray"},{score:{name:"@s",objective:"GuSkull"},color:"white"}]
++execute if items entity @s weapon.mainhand *[minecraft:custom_data~{gu:"rv"}] run return run title @s actionbar [{text:"リボルバー ",color:"gold"},{score:{name:"@s",objective:"GuAmmoRv"},color:"white"},{text:"/6",color:"gray"},{text:"  予備",color:"gray"},{score:{name:"@s",objective:"GuMagRv"},color:"white"},{text:"  頭蓋骨 ",color:"gray"},{score:{name:"@s",objective:"GuSkull"},color:"white"}]
++title @s actionbar [{text:"頭蓋骨 ",color:"gray"},{score:{name:"@s",objective:"GuSkull"},color:"white"}]
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/init_player.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/init_player.mcfunction
+new file mode 100644
+index 0000000..9ceda7e
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/init_player.mcfunction	
+@@ -0,0 +1,36 @@
++#選択時・リセット時の初期値（実行者：対象プレイヤー）
++scoreboard players set @s GuUse 0
++scoreboard players set @s GuHoldT 0
++scoreboard players set @s GuPress 0
++scoreboard players set @s GuCool 0
++scoreboard players set @s GuRate 0
++scoreboard players set @s GuReload 0
++scoreboard players set @s GuReloadW 0
++scoreboard players set @s GuWalk 0
++scoreboard players set @s GuSprint 0
++scoreboard players set @s GuCrouchM 0
++scoreboard players set @s GuMove 0
++scoreboard players set @s GuDeath 0
++scoreboard players set @s GuKill 0
++scoreboard players set @s GuAssist 0
++scoreboard players set @s GuSkull 0
++scoreboard players set @s GuRw1 0
++scoreboard players set @s GuRw3 0
++scoreboard players set @s GuRw5 0
++scoreboard players set @s GuRw10 0
++scoreboard players set @s GuAmmoSg 5
++scoreboard players set @s GuAmmoAk 0
++scoreboard players set @s GuMagAk 0
++scoreboard players set @s GuHasAk 0
++scoreboard players set @s GuAmmoGl 0
++scoreboard players set @s GuMagGl 0
++scoreboard players set @s GuHasGl 0
++scoreboard players set @s GuAmmoP90 0
++scoreboard players set @s GuMagP90 0
++scoreboard players set @s GuHasP90 0
++scoreboard players set @s GuAmmoTec 0
++scoreboard players set @s GuMagTec 0
++scoreboard players set @s GuHasTec 0
++scoreboard players set @s GuAmmoRv 0
++scoreboard players set @s GuMagRv 0
++scoreboard players set @s GuHasRv 0
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/ensure.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/ensure.mcfunction
+new file mode 100644
+index 0000000..b940638
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/ensure.mcfunction	
+@@ -0,0 +1,17 @@
++#初期装備（ショットガン・ナイフ）を常に1つずつにし、拾った武器の所持状態を同期する（実行者：ゲリラ兵）
++execute store result score #c GuCalc run clear @s *[minecraft:custom_data~{gu:"sg"}] 0
++execute if score #c GuCalc matches 2.. run clear @s *[minecraft:custom_data~{gu:"sg"}]
++execute unless score #c GuCalc matches 1 run function main:pvp/guerrilla/item/give_sg
++execute store result score #c GuCalc run clear @s *[minecraft:custom_data~{gu:"knife"}] 0
++execute if score #c GuCalc matches 2.. run clear @s *[minecraft:custom_data~{gu:"knife"}]
++execute unless score #c GuCalc matches 1 run function main:pvp/guerrilla/item/give_knife
++execute store result score #c GuCalc run clear @s *[minecraft:custom_data~{gu:"ak"}] 0
++execute if score #c GuCalc matches 0 run scoreboard players set @s GuHasAk 0
++execute store result score #c GuCalc run clear @s *[minecraft:custom_data~{gu:"gl"}] 0
++execute if score #c GuCalc matches 0 run scoreboard players set @s GuHasGl 0
++execute store result score #c GuCalc run clear @s *[minecraft:custom_data~{gu:"p90"}] 0
++execute if score #c GuCalc matches 0 run scoreboard players set @s GuHasP90 0
++execute store result score #c GuCalc run clear @s *[minecraft:custom_data~{gu:"tec"}] 0
++execute if score #c GuCalc matches 0 run scoreboard players set @s GuHasTec 0
++execute store result score #c GuCalc run clear @s *[minecraft:custom_data~{gu:"rv"}] 0
++execute if score #c GuCalc matches 0 run scoreboard players set @s GuHasRv 0
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_ak.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_ak.mcfunction
+new file mode 100644
+index 0000000..fbee986
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_ak.mcfunction	
+@@ -0,0 +1 @@
++give @s minecraft:carrot_on_a_stick[custom_name={text:"AK47",color:"gold",italic:false},custom_data={gu:"ak",gu_item:1b,gu_loot:1b},item_model="minecraft:iron_hoe",unbreakable={},lore=[{text:"連射RPM600・3/HS6・10mで しゃがみ2/通常3・移動4倍（弾数30は仮）",color:"gray",italic:false},{text:"右クリックで射撃。しゃがむと精度が上がる",color:"gray",italic:false}]] 1
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_bombbow.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_bombbow.mcfunction
+new file mode 100644
+index 0000000..3adcd4a
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_bombbow.mcfunction	
+@@ -0,0 +1,3 @@
++give @s minecraft:bow[custom_name={text:"爆撃弓",color:"gold",italic:false},custom_data={gu:"bombbow",gu_item:1b,gu_loot:1b},unbreakable={},enchantment_glint_override=true,lore=[{text:"矢の落下地点・命中した相手の位置に爆撃を3回行う",color:"gray",italic:false}]] 1
++#仮：矢3本
++give @s minecraft:arrow[custom_name={text:"爆撃の矢",color:"gold",italic:false},custom_data={gu:"bombarrow",gu_item:1b,gu_loot:1b}] 3
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_carpet.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_carpet.mcfunction
+new file mode 100644
+index 0000000..2042c4a
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_carpet.mcfunction	
+@@ -0,0 +1 @@
++give @s minecraft:carrot_on_a_stick[custom_name={text:"絨毯爆撃要請",color:"gold",italic:false},custom_data={gu:"carpet",gu_item:1b,gu_loot:1b},item_model="minecraft:dragon_head",unbreakable={},lore=[{text:"右クリックで、向いている方向へエンダードラゴンが絨毯爆撃を行う",color:"gray",italic:false}],enchantment_glint_override=true] 1
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_gl.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_gl.mcfunction
+new file mode 100644
+index 0000000..a763316
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_gl.mcfunction	
+@@ -0,0 +1 @@
++give @s minecraft:carrot_on_a_stick[custom_name={text:"Garill",color:"gold",italic:false},custom_data={gu:"gl",gu_item:1b,gu_loot:1b},item_model="minecraft:stone_hoe",unbreakable={},lore=[{text:"連射RPM500・3/HS4・10mで しゃがみ2/通常3・移動4倍（弾数35は仮）",color:"gray",italic:false},{text:"右クリックで射撃。しゃがむと精度が上がる",color:"gray",italic:false}]] 1
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_gren.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_gren.mcfunction
+new file mode 100644
+index 0000000..1ea6c8e
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_gren.mcfunction	
+@@ -0,0 +1 @@
++give @s minecraft:snowball[custom_name={text:"グレネード",color:"gold",italic:false},custom_data={gu:"gren",gu_item:1b,gu_loot:1b},item_model="minecraft:fire_charge",lore=[{text:"投げると着弾地点で爆発する",color:"gray",italic:false}]] 1
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_knife.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_knife.mcfunction
+new file mode 100644
+index 0000000..5b227f1
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_knife.mcfunction	
+@@ -0,0 +1 @@
++give @s minecraft:iron_sword[custom_name={text:"ナイフ",color:"gold",italic:false},custom_data={gu:"knife",gu_item:1b},unbreakable={},attribute_modifiers=[{type:"minecraft:attack_damage",amount:5,operation:"add_value",slot:"mainhand",id:"main:gu_knife"}],lore=[{text:"1撃6ダメージ。背後から攻撃するとさらに6ダメージ（仮）",color:"gray",italic:false}]] 1
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_nuke.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_nuke.mcfunction
+new file mode 100644
+index 0000000..b757d68
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_nuke.mcfunction	
+@@ -0,0 +1 @@
++give @s minecraft:carrot_on_a_stick[custom_name={text:"大規模爆風爆弾",color:"gold",italic:false},custom_data={gu:"nuke",gu_item:1b,gu_loot:1b},item_model="minecraft:tnt",unbreakable={},lore=[{text:"右クリックで発動",color:"gray",italic:false}],enchantment_glint_override=true] 1
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_p90.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_p90.mcfunction
+new file mode 100644
+index 0000000..5c2d3a1
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_p90.mcfunction	
+@@ -0,0 +1 @@
++give @s minecraft:carrot_on_a_stick[custom_name={text:"SMG（P90）",color:"gold",italic:false},custom_data={gu:"p90",gu_item:1b,gu_loot:1b},item_model="minecraft:golden_hoe",unbreakable={},lore=[{text:"連射RPM960・2/HS2・10mで しゃがみ2/通常4・移動1.5倍（弾数50は仮）",color:"gray",italic:false},{text:"右クリックで射撃。しゃがむと精度が上がる",color:"gray",italic:false}]] 1
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_rv.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_rv.mcfunction
+new file mode 100644
+index 0000000..80cb278
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_rv.mcfunction	
+@@ -0,0 +1 @@
++give @s minecraft:carrot_on_a_stick[custom_name={text:"リボルバー",color:"gold",italic:false},custom_data={gu:"rv",gu_item:1b,gu_loot:1b},item_model="minecraft:netherite_hoe",unbreakable={},lore=[{text:"単発RPM267・6発・8/HS15・10mで1×1（しゃがんでも同じ）・移動4倍",color:"gray",italic:false},{text:"右クリックで射撃。しゃがむと精度が上がる",color:"gray",italic:false}]] 1
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_sg.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_sg.mcfunction
+new file mode 100644
+index 0000000..374f422
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_sg.mcfunction	
+@@ -0,0 +1 @@
++give @s minecraft:carrot_on_a_stick[custom_name={text:"ショットガン",color:"gold",italic:false},custom_data={gu:"sg",gu_item:1b},item_model="minecraft:crossbow",unbreakable={},lore=[{text:"単発・RPM70・5発・10粒・1粒2/HS3・5mで しゃがみ2/通常4・移動2倍",color:"gray",italic:false},{text:"右クリックで射撃。しゃがむと精度が上がる",color:"gray",italic:false}]] 1
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_tec.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_tec.mcfunction
+new file mode 100644
+index 0000000..c30beb2
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_tec.mcfunction	
+@@ -0,0 +1 @@
++give @s minecraft:carrot_on_a_stick[custom_name={text:"オートピストル（Tec9）",color:"gold",italic:false},custom_data={gu:"tec",gu_item:1b,gu_loot:1b},item_model="minecraft:wooden_hoe",unbreakable={},lore=[{text:"単発RPM400・移動で精度低下なし（ダメージ2/HS3・拡散2・弾数20は仮）",color:"gray",italic:false},{text:"右クリックで射撃。しゃがむと精度が上がる",color:"gray",italic:false}]] 1
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_uav.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_uav.mcfunction
+new file mode 100644
+index 0000000..c311cf1
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/item/give_uav.mcfunction	
+@@ -0,0 +1 @@
++give @s minecraft:carrot_on_a_stick[custom_name={text:"UAV",color:"gold",italic:false},custom_data={gu:"uav",gu_item:1b,gu_loot:1b},item_model="minecraft:recovery_compass",unbreakable={},lore=[{text:"右クリックで敵全員を10秒間発光させる",color:"gray",italic:false}],enchantment_glint_override=true] 1
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/knife/backstab.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/knife/backstab.mcfunction
+new file mode 100644
+index 0000000..37b01ce
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/knife/backstab.mcfunction	
+@@ -0,0 +1,4 @@
++#仮：追加6ダメージ（通常6と合わせて12）
++damage @s 6 main:gu_backstab by @a[tag=GuKnifer,limit=1]
++particle minecraft:crit ~ ~1 ~ 0.2 0.3 0.2 0.3 15
++playsound minecraft:entity.player.attack.crit player @a ~ ~ ~ 1 0.7
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/knife/hit.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/knife/hit.mcfunction
+new file mode 100644
+index 0000000..4adba89
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/knife/hit.mcfunction	
+@@ -0,0 +1,7 @@
++advancement revoke @s only main:guerrilla/knife_hit
++execute unless entity @s[tag=Guerrilla] run return 0
++execute unless items entity @s weapon.mainhand *[minecraft:custom_data~{gu:"knife"}] run return 0
++tag @s add GuKnifer
++execute if entity @s[team=Blue] as @a[team=Red,distance=..6,nbt={HurtTime:10s},sort=nearest,limit=1] at @s run function main:pvp/guerrilla/knife/victim
++execute if entity @s[team=Red] as @a[team=Blue,distance=..6,nbt={HurtTime:10s},sort=nearest,limit=1] at @s run function main:pvp/guerrilla/knife/victim
++tag @s remove GuKnifer
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/knife/victim.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/knife/victim.mcfunction
+new file mode 100644
+index 0000000..1eb1462
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/knife/victim.mcfunction	
+@@ -0,0 +1,10 @@
++#実行者：ナイフで攻撃された敵
++scoreboard players set @s GuAssist 140
++#向きの差が±60度以内（同じ方向を向いている＝背後から）ならバックスタブ（角度は仮）
++execute store result score #a GuCalc run data get entity @a[tag=GuKnifer,limit=1] Rotation[0]
++execute store result score #v GuCalc run data get entity @s Rotation[0]
++scoreboard players operation #a GuCalc -= #v GuCalc
++scoreboard players add #a GuCalc 540
++scoreboard players operation #a GuCalc %= #360 GuCalc
++scoreboard players remove #a GuCalc 180
++execute if score #a GuCalc matches -60..60 run function main:pvp/guerrilla/knife/backstab
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/player_tick.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/player_tick.mcfunction
+new file mode 100644
+index 0000000..8d965a2
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/player_tick.mcfunction	
+@@ -0,0 +1,34 @@
++#実行者：ゲリラ兵
++
++#入力：ニンジン付きの棒の使用回数。右クリック長押し中は約4tickごとに増えるため、5tick以内の再入力を「押し続け」とみなす
++scoreboard players set @s GuPress 0
++execute if score @s GuUse matches 1.. unless score @s GuHoldT matches 1.. run scoreboard players set @s GuPress 1
++execute if score @s GuUse matches 1.. run scoreboard players set @s GuHoldT 5
++execute unless score @s GuUse matches 1.. if score @s GuHoldT matches 1.. run scoreboard players remove @s GuHoldT 1
++scoreboard players set @s GuUse 0
++scoreboard players remove @s[scores={GuCool=1..}] GuCool 1
++
++#移動判定（歩き・ダッシュ・しゃがみ歩きの距離）
++scoreboard players operation @s GuMove = @s GuWalk
++scoreboard players operation @s GuMove += @s GuSprint
++scoreboard players operation @s GuMove += @s GuCrouchM
++scoreboard players set @s GuWalk 0
++scoreboard players set @s GuSprint 0
++scoreboard players set @s GuCrouchM 0
++
++#しゃがむと体が小さくなる
++execute if predicate main:is_sneaking unless entity @s[tag=GuCrouch] run function main:pvp/guerrilla/body/crouch_on
++execute unless predicate main:is_sneaking if entity @s[tag=GuCrouch] run function main:pvp/guerrilla/body/crouch_off
++
++#P90を持っている間はしゃがみ中も速い
++execute if items entity @s weapon.mainhand *[minecraft:custom_data~{gu:"p90"}] unless entity @s[tag=GuP90] run function main:pvp/guerrilla/body/p90_on
++execute unless items entity @s weapon.mainhand *[minecraft:custom_data~{gu:"p90"}] if entity @s[tag=GuP90] run function main:pvp/guerrilla/body/p90_off
++
++#リロード
++execute if score @s GuReload matches 1.. run function main:pvp/guerrilla/gun/reload_tick
++
++#射撃・支給品の使用
++execute if score @s GuHoldT matches 1.. run function main:pvp/guerrilla/gun/held
++
++#表示
++function main:pvp/guerrilla/hud
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/projectile/arrow_tick.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/projectile/arrow_tick.mcfunction
+new file mode 100644
+index 0000000..f3915b9
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/projectile/arrow_tick.mcfunction	
+@@ -0,0 +1,7 @@
++#地面に刺さった矢は消す → markerが降りる。プレイヤーに当たった矢も消えるので同じ扱い
++execute on vehicle if entity @s[nbt={inGround:1b}] run kill @s
++execute if predicate main:gu_riding run return 0
++tag @s remove GuArrowM
++tag @s add GuStrike
++scoreboard players set @s GuCount 3
++scoreboard players set @s GuTimer 20
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/projectile/attach.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/projectile/attach.mcfunction
+new file mode 100644
+index 0000000..8922803
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/projectile/attach.mcfunction	
+@@ -0,0 +1,9 @@
++#実行者：投擲物。追跡用markerを乗せ、投げた人のIDとチームを写す
++scoreboard players set #id GuCalc 0
++scoreboard players set #team GuCalc 0
++execute on origin run function main:pvp/guerrilla/projectile/copy_owner
++ride @e[type=marker,tag=GuNew,limit=1] mount @s
++scoreboard players operation @e[type=marker,tag=GuNew] GuID = #id GuCalc
++execute if score #team GuCalc matches 1 run tag @e[type=marker,tag=GuNew] add GuBlue
++execute if score #team GuCalc matches 2 run tag @e[type=marker,tag=GuNew] add GuRed
++tag @e[type=marker,tag=GuNew] remove GuNew
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/projectile/copy_owner.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/projectile/copy_owner.mcfunction
+new file mode 100644
+index 0000000..31305a1
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/projectile/copy_owner.mcfunction	
+@@ -0,0 +1,4 @@
++#実行者：投げた本人
++scoreboard players operation #id GuCalc = @s GuID
++execute if entity @s[team=Blue] run scoreboard players set #team GuCalc 1
++execute if entity @s[team=Red] run scoreboard players set #team GuCalc 2
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/projectile/nade_tick.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/projectile/nade_tick.mcfunction
+new file mode 100644
+index 0000000..a955c1e
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/projectile/nade_tick.mcfunction	
+@@ -0,0 +1,5 @@
++#雪玉が消えた（着弾した）らその場で爆発
++execute if predicate main:gu_riding run return 0
++#仮：半径4・12ダメージ
++function main:pvp/guerrilla/fx/explode {r:4,d:12}
++kill @s
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/projectile/scan_arrow.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/projectile/scan_arrow.mcfunction
+new file mode 100644
+index 0000000..a8de464
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/projectile/scan_arrow.mcfunction	
+@@ -0,0 +1,4 @@
++tag @s add GuSeen
++execute unless data entity @s item.components."minecraft:custom_data"{gu:"bombarrow"} run return 0
++summon marker ~ ~ ~ {Tags:["GuArrowM","GuNew"]}
++function main:pvp/guerrilla/projectile/attach
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/projectile/scan_snowball.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/projectile/scan_snowball.mcfunction
+new file mode 100644
+index 0000000..582f42f
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/projectile/scan_snowball.mcfunction	
+@@ -0,0 +1,4 @@
++tag @s add GuSeen
++execute unless data entity @s Item.components."minecraft:custom_data"{gu:"gren"} run return 0
++summon marker ~ ~ ~ {Tags:["GuNadeM","GuNew"]}
++function main:pvp/guerrilla/projectile/attach
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reset_player.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reset_player.mcfunction
+new file mode 100644
+index 0000000..b9e5479
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reset_player.mcfunction	
+@@ -0,0 +1,7 @@
++#上級ゲリラ兵の一時状態を解除する（実行者：対象プレイヤー）
++tag @s remove GuCrouch
++tag @s remove GuP90
++attribute @s minecraft:scale modifier remove main:gu_crouch
++attribute @s minecraft:sneaking_speed modifier remove main:gu_p90
++clear @s *[minecraft:custom_data~{gu_item:1b}]
++function main:pvp/guerrilla/init_player
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reset_world.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reset_world.mcfunction
+new file mode 100644
+index 0000000..2d22975
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reset_world.mcfunction	
+@@ -0,0 +1,14 @@
++#上級ゲリラ兵が出したentity・表示の後片付け（試合終了時）
++kill @e[type=marker,tag=GuNadeM]
++kill @e[type=marker,tag=GuArrowM]
++kill @e[type=marker,tag=GuStrike]
++kill @e[type=marker,tag=GuCarpet]
++kill @e[type=marker,tag=GuHitPt]
++execute as @e[type=ender_dragon,tag=GuDragon] at @s run tp @s ~ -300 ~
++kill @e[type=ender_dragon,tag=GuDragon]
++execute as @e[type=creeper,tag=GuBomb] at @s run tp @s ~ -300 ~
++kill @e[type=creeper,tag=GuBomb]
++kill @e[type=item,tag=GuDrop]
++execute as @e[type=item] if items entity @s contents *[minecraft:custom_data~{gu_item:1b}] run kill @s
++bossbar remove main:gu_nuke
++scoreboard players set #nuke GuCalc 0
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/bomb_explode.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/bomb_explode.mcfunction
+new file mode 100644
+index 0000000..4bce75e
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/bomb_explode.mcfunction	
+@@ -0,0 +1,4 @@
++#仮：半径4・12ダメージ
++function main:pvp/guerrilla/fx/explode {r:4,d:12}
++tp @s ~ -300 ~
++kill @s
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/bomb_tick.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/bomb_tick.mcfunction
+new file mode 100644
+index 0000000..bcb855b
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/bomb_tick.mcfunction	
+@@ -0,0 +1,4 @@
++#実行者：落下中の帯電クリーパー。着地したら爆発（5秒で強制爆発）
++scoreboard players add @s GuTimer 1
++execute if entity @s[nbt={OnGround:1b}] run return run function main:pvp/guerrilla/reward/bomb_explode
++execute if score @s GuTimer matches 100.. run function main:pvp/guerrilla/reward/bomb_explode
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/carpet_drop.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/carpet_drop.mcfunction
+new file mode 100644
+index 0000000..2b97634
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/carpet_drop.mcfunction	
+@@ -0,0 +1,7 @@
++scoreboard players set @s GuCount 0
++summon creeper ~ ~-4 ~ {powered:1b,Fuse:32767s,ExplosionRadius:0b,Silent:1b,Invulnerable:1b,PersistenceRequired:1b,Tags:["GuBomb","GuNew"],attributes:[{id:"minecraft:follow_range",base:0.0d}]}
++scoreboard players operation @e[type=creeper,tag=GuNew] GuID = @s GuID
++execute if entity @s[tag=GuBlue] run tag @e[type=creeper,tag=GuNew] add GuBlue
++execute if entity @s[tag=GuRed] run tag @e[type=creeper,tag=GuNew] add GuRed
++scoreboard players set @e[type=creeper,tag=GuNew] GuTimer 0
++tag @e[type=creeper,tag=GuNew] remove GuNew
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/carpet_end.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/carpet_end.mcfunction
+new file mode 100644
+index 0000000..94ecb85
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/carpet_end.mcfunction	
+@@ -0,0 +1,3 @@
++scoreboard players operation #pid GuCalc = @s GuPid
++execute as @e[type=ender_dragon,tag=GuDragon] if score @s GuPid = #pid GuCalc run function main:pvp/guerrilla/reward/remove_dragon
++kill @s
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/carpet_tick.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/carpet_tick.mcfunction
+new file mode 100644
+index 0000000..86c727a
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/carpet_tick.mcfunction	
+@@ -0,0 +1,10 @@
++#実行者：管理marker。前進し、ドラゴンを追従させ、一定間隔でクリーパーを落とす
++scoreboard players remove @s GuTimer 1
++tp @s ^ ^ ^0.8
++scoreboard players operation #pid GuCalc = @s GuPid
++#ドラゴンのモデルは向きと逆に飛ぶため、進行方向の逆を向かせる（実機で逆なら ^ ^ ^10 に変更）
++execute at @s rotated as @s as @e[type=ender_dragon,tag=GuDragon] if score @s GuPid = #pid GuCalc run tp @s ~ ~ ~ facing ^ ^ ^-10
++scoreboard players add @s GuCount 1
++#仮：8tickごとに投下
++execute if score @s GuCount matches 8.. run function main:pvp/guerrilla/reward/carpet_drop
++execute if score @s GuTimer matches ..0 run function main:pvp/guerrilla/reward/carpet_end
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/carpet_use.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/carpet_use.mcfunction
+new file mode 100644
+index 0000000..dddf407
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/carpet_use.mcfunction	
+@@ -0,0 +1,18 @@
++#実行者：ゲリラ兵。頭上15ブロックに向いている方向へ進む管理markerとドラゴンを出す
++item replace entity @s weapon.mainhand with minecraft:air
++scoreboard players add #pid GuPid 1
++execute rotated ~ 0 positioned ~ ~15 ~ run summon marker ~ ~ ~ {Tags:["GuCarpet","GuNew"]}
++execute rotated ~ 0 run tp @e[type=marker,tag=GuNew,limit=1] ~ ~15 ~ facing ^ ^15 ^10
++scoreboard players operation @e[type=marker,tag=GuNew] GuPid = #pid GuPid
++scoreboard players operation @e[type=marker,tag=GuNew] GuID = @s GuID
++execute if entity @s[team=Blue] run tag @e[type=marker,tag=GuNew] add GuBlue
++execute if entity @s[team=Red] run tag @e[type=marker,tag=GuNew] add GuRed
++#仮：75tick（約60ブロック）飛行
++scoreboard players set @e[type=marker,tag=GuNew] GuTimer 75
++scoreboard players set @e[type=marker,tag=GuNew] GuCount 0
++execute at @e[type=marker,tag=GuNew,limit=1] run summon ender_dragon ~ ~ ~ {NoAI:1b,Silent:1b,Invulnerable:1b,PersistenceRequired:1b,Tags:["GuDragon","GuNewD"]}
++scoreboard players operation @e[type=ender_dragon,tag=GuNewD] GuPid = #pid GuPid
++tag @e[type=ender_dragon,tag=GuNewD] remove GuNewD
++tag @e[type=marker,tag=GuNew] remove GuNew
++execute as @a at @s run playsound minecraft:entity.ender_dragon.growl master @s ~ ~ ~ 1 0.8
++tellraw @a [{selector:"@s"},{text:"が絨毯爆撃を要請した",color:"red"}]
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/check.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/check.mcfunction
+new file mode 100644
+index 0000000..2d6a6ec
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/check.mcfunction	
+@@ -0,0 +1,5 @@
++#頭蓋骨の所持数で支給（消費しない。1ライフにつき各1回）
++execute if score @s GuSkull matches 1.. unless score @s GuRw1 matches 1 run function main:pvp/guerrilla/reward/grant_1
++execute if score @s GuSkull matches 3.. unless score @s GuRw3 matches 1 run function main:pvp/guerrilla/reward/grant_3
++execute if score @s GuSkull matches 5.. unless score @s GuRw5 matches 1 run function main:pvp/guerrilla/reward/grant_5
++execute if score @s GuSkull matches 10.. unless score @s GuRw10 matches 1 run function main:pvp/guerrilla/reward/grant_10
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/grant_1.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/grant_1.mcfunction
+new file mode 100644
+index 0000000..3af09bf
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/grant_1.mcfunction	
+@@ -0,0 +1,5 @@
++scoreboard players set @s GuRw1 1
++function main:pvp/guerrilla/item/give_uav
++playsound minecraft:block.note_block.pling player @s ~ ~ ~ 1 1.5
++title @s subtitle {text:"支給要請：UAV",color:"gold"}
++title @s title {text:""}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/grant_10.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/grant_10.mcfunction
+new file mode 100644
+index 0000000..c15fe93
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/grant_10.mcfunction	
+@@ -0,0 +1,5 @@
++scoreboard players set @s GuRw10 1
++function main:pvp/guerrilla/item/give_nuke
++playsound minecraft:block.note_block.pling player @s ~ ~ ~ 1 1.5
++title @s subtitle {text:"支給要請：大規模爆風爆弾",color:"gold"}
++title @s title {text:""}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/grant_3.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/grant_3.mcfunction
+new file mode 100644
+index 0000000..69c567d
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/grant_3.mcfunction	
+@@ -0,0 +1,5 @@
++scoreboard players set @s GuRw3 1
++function main:pvp/guerrilla/item/give_bombbow
++playsound minecraft:block.note_block.pling player @s ~ ~ ~ 1 1.5
++title @s subtitle {text:"支給要請：爆撃弓",color:"gold"}
++title @s title {text:""}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/grant_5.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/grant_5.mcfunction
+new file mode 100644
+index 0000000..90aae51
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/grant_5.mcfunction	
+@@ -0,0 +1,5 @@
++scoreboard players set @s GuRw5 1
++function main:pvp/guerrilla/item/give_carpet
++playsound minecraft:block.note_block.pling player @s ~ ~ ~ 1 1.5
++title @s subtitle {text:"支給要請：絨毯爆撃",color:"gold"}
++title @s title {text:""}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/nuke_blast.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/nuke_blast.mcfunction
+new file mode 100644
+index 0000000..c23bafd
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/nuke_blast.mcfunction	
+@@ -0,0 +1,8 @@
++#実行者：各プレイヤー。周囲で爆発が連続して見える演出
++particle minecraft:explosion_emitter ~ ~ ~ 12 4 12 0 1 force @s
++particle minecraft:lava ~ ~ ~ 10 3 10 0 6 force @s
++particle minecraft:large_smoke ~ ~2 ~ 10 3 10 0.05 10 force @s
++scoreboard players operation #m GuCalc = #nuke GuCalc
++scoreboard players operation #m GuCalc %= #10 GuCalc
++execute if score #m GuCalc matches 0 run playsound minecraft:entity.generic.explode master @s ~ ~ ~ 1 0.6
++execute if score #m GuCalc matches 5 run playsound minecraft:entity.generic.explode master @s ~ ~ ~ 1 0.4
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/nuke_impact.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/nuke_impact.mcfunction
+new file mode 100644
+index 0000000..6cb1f57
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/nuke_impact.mcfunction	
+@@ -0,0 +1,5 @@
++bossbar set main:gu_nuke name {text:"大規模爆風爆弾 着弾",color:"dark_red",bold:true}
++bossbar set main:gu_nuke value 0
++execute as @a at @s run playsound minecraft:entity.generic.explode master @s ~ ~ ~ 1 0.5
++execute as @a at @s run playsound minecraft:entity.lightning_bolt.thunder master @s ~ ~ ~ 1 0.5
++effect give @a minecraft:darkness 3 0 true
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/nuke_tick.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/nuke_tick.mcfunction
+new file mode 100644
+index 0000000..1c39454
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/nuke_tick.mcfunction	
+@@ -0,0 +1,11 @@
++scoreboard players remove #nuke GuCalc 1
++scoreboard players operation #nb GuCalc = #nuke GuCalc
++scoreboard players remove #nb GuCalc 100
++execute if score #nuke GuCalc matches 101.. store result bossbar main:gu_nuke value run scoreboard players get #nb GuCalc
++#カウントダウン中の鼓動（1秒ごと）
++scoreboard players operation #m GuCalc = #nuke GuCalc
++scoreboard players operation #m GuCalc %= #10 GuCalc
++execute if score #nuke GuCalc matches 101.. if score #m GuCalc matches 0 as @a at @s run playsound minecraft:block.note_block.basedrum master @s ~ ~ ~ 1 0.5
++execute if score #nuke GuCalc matches 100 run function main:pvp/guerrilla/reward/nuke_impact
++execute if score #nuke GuCalc matches 1..100 as @a[gamemode=!spectator] at @s run function main:pvp/guerrilla/reward/nuke_blast
++execute if score #nuke GuCalc matches ..0 run bossbar remove main:gu_nuke
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/nuke_use.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/nuke_use.mcfunction
+new file mode 100644
+index 0000000..f8f2575
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/nuke_use.mcfunction	
+@@ -0,0 +1,17 @@
++#大規模爆風爆弾：演出のみ（ダメージは仕様未定のため未実装）
++execute if score #nuke GuCalc matches 1.. run return run tellraw @s {text:"大規模爆風爆弾はすでに発動中です",color:"red"}
++item replace entity @s weapon.mainhand with minecraft:air
++#200tickのカウントダウン + 100tickの爆発演出
++scoreboard players set #nuke GuCalc 300
++bossbar remove main:gu_nuke
++bossbar add main:gu_nuke {text:"大規模爆風爆弾",color:"dark_red",bold:true}
++bossbar set main:gu_nuke color red
++bossbar set main:gu_nuke style notched_10
++bossbar set main:gu_nuke max 200
++bossbar set main:gu_nuke value 200
++bossbar set main:gu_nuke players @a
++execute as @a at @s run playsound minecraft:entity.wither.spawn master @s ~ ~ ~ 1 0.6
++execute as @a at @s run playsound minecraft:event.raid.horn master @s ~ ~ ~ 1 0.6
++execute as @a at @s run playsound minecraft:entity.elder_guardian.curse master @s ~ ~ ~ 1 0.5
++title @a subtitle [{selector:"@s"},{text:"が要請した",color:"gray"}]
++title @a title {text:"大規模爆風爆弾",color:"dark_red",bold:true}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/remove_dragon.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/remove_dragon.mcfunction
+new file mode 100644
+index 0000000..1746a8e
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/remove_dragon.mcfunction	
+@@ -0,0 +1,2 @@
++execute at @s run tp @s ~ -300 ~
++kill @s
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/strike_tick.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/strike_tick.mcfunction
+new file mode 100644
+index 0000000..0ff4e56
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/strike_tick.mcfunction	
+@@ -0,0 +1,8 @@
++#実行者：爆撃弓の着弾点marker。警告表示の後、10tickごとに3回爆撃（間隔・威力は仮）
++scoreboard players remove @s GuTimer 1
++particle minecraft:dust{color:[1.0,0.1,0.1],scale:2.0} ~ ~0.2 ~ 2 0 2 0 4 force
++execute if score @s GuTimer matches 1.. run return 0
++function main:pvp/guerrilla/fx/explode {r:4,d:10}
++scoreboard players remove @s GuCount 1
++scoreboard players set @s GuTimer 10
++execute if score @s GuCount matches ..0 run kill @s
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/uav_use.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/uav_use.mcfunction
+new file mode 100644
+index 0000000..71352f2
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/reward/uav_use.mcfunction	
+@@ -0,0 +1,5 @@
++item replace entity @s weapon.mainhand with minecraft:air
++execute if entity @s[team=Blue] run effect give @a[team=Red,gamemode=!spectator] minecraft:glowing 10 0 true
++execute if entity @s[team=Red] run effect give @a[team=Blue,gamemode=!spectator] minecraft:glowing 10 0 true
++execute as @a at @s run playsound minecraft:block.beacon.activate master @s ~ ~ ~ 1 1.5
++tellraw @a [{selector:"@s"},{text:"がUAVを起動した",color:"yellow"}]
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/setup.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/setup.mcfunction
+new file mode 100644
+index 0000000..b05f289
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/setup.mcfunction	
+@@ -0,0 +1,49 @@
++#上級ゲリラ兵で使用するscoreboardを初回選択時に作成する
++scoreboard objectives add GuCalc dummy
++scoreboard objectives add GuID dummy
++scoreboard objectives add GuPid dummy
++scoreboard objectives add GuUse minecraft.used:minecraft.carrot_on_a_stick
++scoreboard objectives add GuHoldT dummy
++scoreboard objectives add GuPress dummy
++scoreboard objectives add GuCool dummy
++scoreboard objectives add GuRate dummy
++scoreboard objectives add GuReload dummy
++scoreboard objectives add GuReloadW dummy
++scoreboard objectives add GuWalk minecraft.custom:minecraft.walk_one_cm
++scoreboard objectives add GuSprint minecraft.custom:minecraft.sprint_one_cm
++scoreboard objectives add GuCrouchM minecraft.custom:minecraft.crouch_one_cm
++scoreboard objectives add GuMove dummy
++scoreboard objectives add GuDeath deathCount
++scoreboard objectives add GuKill playerKillCount
++scoreboard objectives add GuAssist dummy
++scoreboard objectives add GuPX dummy
++scoreboard objectives add GuPY dummy
++scoreboard objectives add GuPZ dummy
++scoreboard objectives add GuSkull dummy
++scoreboard objectives add GuRw1 dummy
++scoreboard objectives add GuRw3 dummy
++scoreboard objectives add GuRw5 dummy
++scoreboard objectives add GuRw10 dummy
++scoreboard objectives add GuTimer dummy
++scoreboard objectives add GuCount dummy
++scoreboard objectives add GuAmmoSg dummy
++scoreboard objectives add GuAmmoAk dummy
++scoreboard objectives add GuMagAk dummy
++scoreboard objectives add GuHasAk dummy
++scoreboard objectives add GuAmmoGl dummy
++scoreboard objectives add GuMagGl dummy
++scoreboard objectives add GuHasGl dummy
++scoreboard objectives add GuAmmoP90 dummy
++scoreboard objectives add GuMagP90 dummy
++scoreboard objectives add GuHasP90 dummy
++scoreboard objectives add GuAmmoTec dummy
++scoreboard objectives add GuMagTec dummy
++scoreboard objectives add GuHasTec dummy
++scoreboard objectives add GuAmmoRv dummy
++scoreboard objectives add GuMagRv dummy
++scoreboard objectives add GuHasRv dummy
++
++scoreboard players set #10 GuCalc 10
++scoreboard players set #360 GuCalc 360
++scoreboard players set #nuke GuCalc 0
++data modify storage main:guerrilla setup set value 1b
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/slow.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/slow.mcfunction
+new file mode 100644
+index 0000000..b5aef4c
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/guerrilla/slow.mcfunction	
+@@ -0,0 +1,4 @@
++scoreboard players set #slow GuCalc 0
++execute as @a[tag=Guerrilla] run function main:pvp/guerrilla/item/ensure
++#プレイヤーが捨てたゲリラ兵の装備（ドロップ品以外）は消す
++execute as @e[type=item,tag=!GuDrop] if items entity @s contents *[minecraft:custom_data~{gu_item:1b}] run kill @s
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/pvp_control.mcfunction b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/pvp_control.mcfunction
+index eb5ab7a..954d590 100644
+--- a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/pvp_control.mcfunction	
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/function/pvp/pvp_control.mcfunction	
+@@ -79,3 +79,5 @@ execute if entity @a[tag=Heretic] run function main:pvp/heretic/heretic
+ execute if entity @a[tag=Poseidon] run function main:pvp/poseidon/poseidon
+ #羊飼い
+ execute if entity @a[tag=Shepherd] run function main:pvp/shepherd/shepherd
++#上級ゲリラ兵
++execute if entity @a[tag=Guerrilla] run function main:pvp/guerrilla/guerrilla
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/predicate/gu_riding.json b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/predicate/gu_riding.json
+new file mode 100644
+index 0000000..f6494ce
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/predicate/gu_riding.json	
+@@ -0,0 +1,7 @@
++{
++  "condition": "minecraft:entity_properties",
++  "entity": "this",
++  "predicate": {
++    "vehicle": {}
++  }
++}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/tags/block/gu_passable.json b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/tags/block/gu_passable.json
+new file mode 100644
+index 0000000..78bdeaa
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/main/tags/block/gu_passable.json	
+@@ -0,0 +1,13 @@
++{
++  "values": [
++    "minecraft:air",
++    "minecraft:cave_air",
++    "minecraft:void_air",
++    "minecraft:light",
++    "minecraft:short_grass",
++    "minecraft:tall_grass",
++    "minecraft:fern",
++    "minecraft:large_fern",
++    "minecraft:water"
++  ]
++}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/minecraft/tags/damage_type/bypasses_cooldown.json b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/minecraft/tags/damage_type/bypasses_cooldown.json
+new file mode 100644
+index 0000000..2574466
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/minecraft/tags/damage_type/bypasses_cooldown.json	
+@@ -0,0 +1,8 @@
++{
++  "replace": false,
++  "values": [
++    "main:gu_bullet",
++    "main:gu_backstab",
++    "main:gu_explosion"
++  ]
++}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/minecraft/tags/damage_type/is_explosion.json b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/minecraft/tags/damage_type/is_explosion.json
+new file mode 100644
+index 0000000..bec81da
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/minecraft/tags/damage_type/is_explosion.json	
+@@ -0,0 +1,6 @@
++{
++  "replace": false,
++  "values": [
++    "main:gu_explosion"
++  ]
++}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/minecraft/tags/damage_type/is_projectile.json b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/minecraft/tags/damage_type/is_projectile.json
+new file mode 100644
+index 0000000..dd9a4f0
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/minecraft/tags/damage_type/is_projectile.json	
+@@ -0,0 +1,6 @@
++{
++  "replace": false,
++  "values": [
++    "main:gu_bullet"
++  ]
++}
+diff --git a/minecraft 1.21.5 sjp/world/datapacks/pvp/data/minecraft/tags/damage_type/no_knockback.json b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/minecraft/tags/damage_type/no_knockback.json
+new file mode 100644
+index 0000000..dd9a4f0
+--- /dev/null
++++ b/minecraft 1.21.5 sjp/world/datapacks/pvp/data/minecraft/tags/damage_type/no_knockback.json	
+@@ -0,0 +1,6 @@
++{
++  "replace": false,
++  "values": [
++    "main:gu_bullet"
++  ]
++}
