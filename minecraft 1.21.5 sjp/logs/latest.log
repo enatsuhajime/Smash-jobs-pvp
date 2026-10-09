@@ -1,12 +1,12 @@
-[10:55:28] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
-[10:55:29] [Worker-Main-4/ERROR]: Invalid path in pack: main:function/job_selection/FallenAngel.mcfunction, ignoring
-[10:55:29] [Worker-Main-4/ERROR]: Invalid path in pack: main:function/job_selection/元sword.mcfunction, ignoring
-[10:55:29] [Worker-Main-4/ERROR]: Invalid path in pack: main:function/pvp/elf/elf_particle/elf_particle_barrier(1).mcfunction, ignoring
-[10:55:29] [Worker-Main-4/ERROR]: Invalid path in pack: main:function/pvp/ticket/mastery copy.mcfunction, ignoring
-[10:55:29] [Worker-Main-4/ERROR]: Invalid path in pack: main:function/メモ帳.mcfunction, ignoring
-[10:55:29] [Worker-Main-4/ERROR]: Invalid path in pack: main:function/自由帳, ignoring
-[10:55:29] [ServerMain/INFO]: Loaded 1373 recipes
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:job_selection/shaco
+[13:08:53] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[13:08:55] [Worker-Main-4/ERROR]: Invalid path in pack: main:function/job_selection/FallenAngel.mcfunction, ignoring
+[13:08:56] [Worker-Main-4/ERROR]: Invalid path in pack: main:function/job_selection/元sword.mcfunction, ignoring
+[13:08:56] [Worker-Main-4/ERROR]: Invalid path in pack: main:function/pvp/elf/elf_particle/elf_particle_barrier(1).mcfunction, ignoring
+[13:08:56] [Worker-Main-4/ERROR]: Invalid path in pack: main:function/pvp/ticket/mastery copy.mcfunction, ignoring
+[13:08:56] [Worker-Main-4/ERROR]: Invalid path in pack: main:function/メモ帳.mcfunction, ignoring
+[13:08:56] [Worker-Main-4/ERROR]: Invalid path in pack: main:function/自由帳, ignoring
+[13:08:56] [ServerMain/INFO]: Loaded 1373 recipes
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:job_selection/shaco
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 9: Unknown item 'minecraft:give' at position 8: give @p <--[HERE]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -23,7 +23,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 9:
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:pvp/assist/assist_jum/assist_sky_sub
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:pvp/assist/assist_jum/assist_sky_sub
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Expected literal : at position 136: ...e_rod",nbt<--[HERE]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -40,7 +40,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 4:
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:waiting_place/book/occupational_books
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:waiting_place/book/occupational_books
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 3: Expected whitespace to end one argument, but found trailing data at position 20: ...itten_book<--[HERE]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -57,7 +57,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 3:
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:first/first_title
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:first/first_title
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 24: Incorrect argument for command at position 71: ...1 5011 90 <--[HERE]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -74,7 +74,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 24
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:job_selection/bowcopy
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:job_selection/bowcopy
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 18: Expected whitespace to end one argument, but found trailing data at position 68: ...:stone_axe<--[HERE]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -91,7 +91,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 18
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:job_selection/musician
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:job_selection/musician
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 21: Expected whitespace to end one argument, but found trailing data at position 35: ...on_a_stick<--[HERE]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -108,7 +108,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 21
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:job_selection/swordmaster
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:job_selection/swordmaster
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 14: Expected whitespace to end one argument, but found trailing data at position 74: ...iron_sword<--[HERE]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -125,7 +125,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 14
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:pvp/sword/throwsword_sub
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:pvp/sword/throwsword_sub
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Expected whitespace to end one argument, but found trailing data at position 28: ...iron_sword<--[HERE]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -142,7 +142,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 4:
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:job_selection/fighter
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:job_selection/fighter
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 20: Unknown or incomplete command, see below for error at position 7: give @p<--[HERE]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -159,7 +159,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 20
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:job_selection/shaman
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:job_selection/shaman
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 11: Expected whitespace to end one argument, but found trailing data at position 30: ...lden_sword<--[HERE]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -176,7 +176,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 11
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:waiting_place/endroll/endroll_sub
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:waiting_place/endroll/endroll_sub
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 75: Expected whitespace to end one argument, but found trailing data at position 76: ...nce_bottle<--[HERE]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -193,7 +193,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 75
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:used_tatuzinken
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:used_tatuzinken
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 1: Unknown or incomplete command, see below for error at position 40: ... at @s run<--[HERE]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -210,7 +210,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 1:
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:pvp/musician/musician
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:pvp/musician/musician
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 5: Expected whitespace to end one argument, but found trailing data at position 80: ...disc_chirp<--[HERE]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -227,7 +227,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 5:
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:job_selection/set_armor_stand/bowscouter
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:job_selection/set_armor_stand/bowscouter
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Can't find element 'minecraft:minecraftarmor_stand' of type 'minecraft:entity_type' at position 27: ...rmor_stand<--[HERE]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -244,7 +244,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 4:
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:gatya
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:gatya
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 5: Unknown option 'tags' at position 14: ...ute as @a[<--[HERE]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -261,7 +261,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 5:
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:waiting_place/book/stage_books
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:waiting_place/book/stage_books
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 3: Expected whitespace to end one argument, but found trailing data at position 20: ...itten_book<--[HERE]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -278,7 +278,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 3:
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:pvp/assist2/assist_jum/assist_hallucinations_sub
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:pvp/assist2/assist_jum/assist_hallucinations_sub
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 8: Unknown particle: minecraft:ambient_entity_effect at position 84: ...ity_effect<--[HERE]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -295,7 +295,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 8:
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:wizard_jiyucho
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:wizard_jiyucho
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 9: Expected literal : at position 678: ..."敵の周囲を燃やす"<--[HERE]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -312,7 +312,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 9:
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:job_selection/rengoku
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:job_selection/rengoku
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 15: Expected whitespace to end one argument, but found trailing data at position 23: ...rite_sword<--[HERE]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -329,7 +329,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 15
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:mode/gatiarea/range_line_e
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:mode/gatiarea/range_line_e
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Can't parse particle options: No key scale in MapLike[{}]; No key color in MapLike[{}]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -346,7 +346,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 4:
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:mode/gatiarea/range_line_d
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:mode/gatiarea/range_line_d
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Can't parse particle options: No key scale in MapLike[{}]; No key color in MapLike[{}]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -363,7 +363,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 4:
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:mode/gatiarea/range_line_c
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:mode/gatiarea/range_line_c
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Can't parse particle options: No key scale in MapLike[{}]; No key color in MapLike[{}]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -380,7 +380,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 4:
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:mode/gatiarea/range_line_b
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:mode/gatiarea/range_line_b
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Can't parse particle options: No key scale in MapLike[{}]; No key color in MapLike[{}]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -397,7 +397,7 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 4:
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/ERROR]: Failed to load function main:mode/gatiarea/range_line_a
+[13:08:56] [ServerMain/ERROR]: Failed to load function main:mode/gatiarea/range_line_a
 java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Can't parse particle options: No key scale in MapLike[{}]; No key color in MapLike[{}]
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
@@ -414,107 +414,480 @@ Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 4:
 	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
 	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
 	... 7 more
-[10:55:29] [ServerMain/INFO]: Loaded 1487 advancements
-[10:55:29] [Server thread/INFO]: Starting minecraft server version 1.21.5
-[10:55:29] [Server thread/INFO]: Loading properties
-[10:55:29] [Server thread/INFO]: Default game type: SURVIVAL
-[10:55:29] [Server thread/INFO]: Generating keypair
-[10:55:29] [Server thread/INFO]: Starting Minecraft server on *:25565
-[10:55:30] [Server thread/INFO]: Using default channel type
-[10:55:30] [Server thread/INFO]: Preparing level "world"
-[10:55:30] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
-[10:55:30] [Worker-Main-21/INFO]: Preparing spawn area: 0%
-[10:55:30] [Server thread/INFO]: Time elapsed: 295 ms
-[10:55:30] [Server thread/INFO]: Done (0.386s)! For help, type "help"
-[10:55:34] [User Authenticator #1/INFO]: UUID of player sikigami_izumo is e5f93a1f-65a0-4419-ba71-c4fa0983d3f8
-[10:55:35] [Server thread/INFO]: sikigami_izumo[/127.0.0.1:62102] logged in with entity id 183 at (29.764972705832058, 1.0, 10018.962730151045)
-[10:55:35] [Server thread/INFO]: sikigami_izumo joined the game
-[11:30:50] [User Authenticator #2/INFO]: UUID of player jim_good is 0884a556-7508-4624-a6a5-79574dcf7362
-[11:30:50] [Server thread/WARN]: Ignored advancement 'main:used_rightpunch' in progress file .\world\advancements\0884a556-7508-4624-a6a5-79574dcf7362.json - it doesn't exist anymore?
-[11:30:51] [Server thread/INFO]: jim_good[/127.0.0.1:63599] logged in with entity id 933 at (29.498122670814038, 1.0, 10022.225283071917)
-[11:30:51] [Server thread/INFO]: jim_good joined the game
-[11:33:09] [Server thread/INFO]: [sikigami_izumo: Set own game mode to Survival Mode]
-[11:33:14] [Server thread/INFO]: jim_good was struck by lightning while fighting sikigami_izumo
-[11:34:11] [Server thread/INFO]: [sikigami_izumo: Set [SelectJum] for sikigami_izumo to 15]
-[11:34:37] [Server thread/INFO]: [sikigami_izumo: Made jim_good a server operator]
-[11:39:10] [Server thread/INFO]: [sikigami_izumo: Applied effect Hunger to jim_good]
-[11:39:47] [Server thread/INFO]: sikigami_izumo was slain by jim_good using [餓狼剣]
-[11:41:53] [Server thread/INFO]: [sikigami_izumo: Added 72 to [MKFire] for jim_good (now 72)]
-[11:42:01] [Server thread/INFO]: sikigami_izumo was blown up by jim_good using [魔喰]
-[11:42:23] [Server thread/INFO]: sikigami_izumo was blown up by jim_good using [魔喰]
-[11:42:47] [Server thread/INFO]: [sikigami_izumo: Added jim_good to team [Red]]
-[11:42:54] [Server thread/INFO]: [sikigami_izumo: Added sikigami_izumo to team [Blue]]
-[11:43:10] [Server thread/INFO]: Named entity ckv['子兎'/2104, l='ServerLevel[PVP_world]', x=30.52, y=1.00, z=10030.99] died: 子兎 was shot by 画中人
-[11:43:12] [Server thread/INFO]: sikigami_izumo was slain by 子兎
-[11:43:19] [Server thread/INFO]: Named entity ckv['子兎'/2103, l='ServerLevel[PVP_world]', x=23.95, y=1.00, z=10028.80] died: 子兎 was killed
-[11:43:19] [Server thread/INFO]: Named entity ckv['子兎'/2105, l='ServerLevel[PVP_world]', x=31.19, y=1.00, z=10035.03] died: 子兎 was killed
-[11:43:19] [Server thread/INFO]: Named entity ckv['子兎'/2106, l='ServerLevel[PVP_world]', x=28.01, y=1.00, z=10028.53] died: 子兎 was killed
-[11:43:19] [Server thread/INFO]: Named entity ckv['子兎'/2107, l='ServerLevel[PVP_world]', x=28.72, y=1.00, z=10027.65] died: 子兎 was killed
-[11:43:28] [Server thread/INFO]: Named entity ckv['子兎'/2249, l='ServerLevel[PVP_world]', x=25.50, y=1.00, z=10034.77] died: 子兎 was killed
-[11:43:28] [Server thread/INFO]: Named entity ckv['子兎'/2250, l='ServerLevel[PVP_world]', x=28.17, y=1.35, z=10033.83] died: 子兎 was killed
-[11:43:28] [Server thread/INFO]: Named entity ckv['子兎'/2251, l='ServerLevel[PVP_world]', x=29.52, y=1.00, z=10038.80] died: 子兎 was killed
-[11:43:28] [Server thread/INFO]: Named entity ckv['子兎'/2252, l='ServerLevel[PVP_world]', x=28.50, y=1.00, z=10033.50] died: 子兎 was killed
-[11:43:28] [Server thread/INFO]: Named entity ckv['子兎'/2253, l='ServerLevel[PVP_world]', x=19.40, y=1.00, z=10040.60] died: 子兎 was killed
-[11:43:33] [Server thread/INFO]: Named entity ckv['子兎'/2356, l='ServerLevel[PVP_world]', x=31.06, y=1.00, z=10027.83] died: 子兎 was killed
-[11:43:33] [Server thread/INFO]: Named entity ckv['子兎'/2357, l='ServerLevel[PVP_world]', x=28.75, y=1.64, z=10025.70] died: 子兎 was killed
-[11:43:33] [Server thread/INFO]: Named entity ckv['子兎'/2358, l='ServerLevel[PVP_world]', x=28.41, y=1.50, z=10028.40] died: 子兎 was killed
-[11:43:33] [Server thread/INFO]: Named entity ckv['子兎'/2359, l='ServerLevel[PVP_world]', x=31.31, y=1.00, z=10029.46] died: 子兎 was killed
-[11:43:33] [Server thread/INFO]: Named entity ckv['子兎'/2360, l='ServerLevel[PVP_world]', x=30.87, y=1.00, z=10026.99] died: 子兎 was killed
-[11:44:01] [Server thread/INFO]: Named entity cps['画中人'/1829, l='ServerLevel[PVP_world]', x=25.65, y=1.00, z=10044.35] died: 画中人 was shot by 画中人
-[11:44:16] [Server thread/INFO]: sikigami_izumo was slain by jim_good using [大地の斧]
-[11:44:29] [Server thread/INFO]: Named entity cps['画中人'/1828, l='ServerLevel[PVP_world]', x=28.77, y=1.00, z=10030.50] died: 画中人 was slain by sikigami_izumo using [黎明の長剣]
-[11:45:12] [Server thread/INFO]: Named entity cle['ゲート3'/3016, l='ServerLevel[PVP_world]', x=28.67, y=1.00, z=10030.86] died: ゲート3 was killed
-[11:45:13] [Server thread/INFO]: Named entity cle['ゲート3'/3017, l='ServerLevel[PVP_world]', x=28.37, y=1.00, z=10030.74] died: ゲート3 was killed
-[11:45:14] [Server thread/INFO]: Named entity cle['ゲート3'/3018, l='ServerLevel[PVP_world]', x=27.52, y=1.00, z=10030.81] died: ゲート3 was killed
-[11:45:14] [Server thread/INFO]: Named entity cle['ゲート3'/3019, l='ServerLevel[PVP_world]', x=23.23, y=1.00, z=10031.65] died: ゲート3 was killed
-[11:45:40] [Server thread/INFO]: Named entity cle['ゲート2'/3023, l='ServerLevel[PVP_world]', x=25.64, y=1.00, z=10054.55] died: ゲート2 was killed
-[11:45:46] [Server thread/INFO]: Named entity cle['ゲート1'/3055, l='ServerLevel[PVP_world]', x=20.27, y=1.00, z=10041.38] died: ゲート1 was killed
-[11:45:47] [Server thread/INFO]: Named entity cle['ゲート1'/3056, l='ServerLevel[PVP_world]', x=19.07, y=1.00, z=10043.07] died: ゲート1 was killed
-[11:46:12] [Server thread/INFO]: Named entity cle['ゲート3'/3020, l='ServerLevel[PVP_world]', x=22.60, y=1.00, z=10031.67] died: ゲート3 was killed
-[11:46:15] [Server thread/INFO]: Named entity cle['ゲート3'/3069, l='ServerLevel[PVP_world]', x=25.52, y=1.00, z=10044.69] died: ゲート3 was killed
-[11:46:19] [Server thread/INFO]: Named entity cle['ゲート3'/3070, l='ServerLevel[PVP_world]', x=27.91, y=1.00, z=10045.67] died: ゲート3 was killed
-[11:47:38] [Server thread/INFO]: Named entity cle['ゲート3'/3135, l='ServerLevel[PVP_world]', x=41.12, y=1.00, z=10020.01] died: ゲート3 was killed
-[11:47:43] [Server thread/INFO]: Named entity cle['ゲート4'/3068, l='ServerLevel[PVP_world]', x=22.71, y=1.00, z=10051.58] died: ゲート4 was killed
-[11:48:30] [Server thread/INFO]: Named entity cle['ゲート1'/3057, l='ServerLevel[PVP_world]', x=34.94, y=1.00, z=10050.42] died: ゲート1 was killed
-[11:48:32] [Server thread/INFO]: Named entity cle['ゲート1'/3184, l='ServerLevel[PVP_world]', x=27.63, y=1.00, z=10049.61] died: ゲート1 was killed
-[11:48:36] [Server thread/INFO]: Named entity cle['ゲート2'/3183, l='ServerLevel[PVP_world]', x=23.45, y=1.00, z=10050.02] died: ゲート2 was killed
-[11:49:02] [Server thread/INFO]: [sikigami_izumo: Set own game mode to Survival Mode]
-[11:49:09] [Server thread/INFO]: jim_good lost connection: Disconnected
-[11:49:09] [Server thread/INFO]: jim_good left the game
-[11:49:14] [Server thread/INFO]: [sikigami_izumo: Running function main:finish/finish]
-[11:49:14] [Server thread/INFO]: Named entity cle['ゲート2'/3060, l='ServerLevel[PVP_world]', x=35.01, y=1.00, z=10059.42] died: ゲート2 was killed
-[11:49:14] [Server thread/INFO]: Named entity cle['ゲート3'/3136, l='ServerLevel[PVP_world]', x=34.94, y=1.00, z=10050.42] died: ゲート3 was killed
-[11:49:14] [Server thread/INFO]: Named entity cle['ゲート4'/3139, l='ServerLevel[PVP_world]', x=40.54, y=1.00, z=10023.49] died: ゲート4 was killed
-[11:49:14] [Server thread/INFO]: Named entity cle['ゲート1'/3185, l='ServerLevel[PVP_world]', x=25.81, y=1.80, z=10045.16] died: ゲート1 was killed
-[11:49:38] [User Authenticator #3/INFO]: UUID of player jim_good is 0884a556-7508-4624-a6a5-79574dcf7362
-[11:49:39] [Server thread/INFO]: jim_good[/127.0.0.1:58108] logged in with entity id 3473 at (32.19736591434949, 1.0, 10041.44047149658)
-[11:49:39] [Server thread/INFO]: jim_good joined the game
-[11:51:42] [Server thread/INFO]: [sikigami_izumo: Added sikigami_izumo to team [Blue]]
-[11:51:54] [Server thread/INFO]: [sikigami_izumo: Added 799 to [sneak] for jim_good (now 799)]
-[11:52:19] [Server thread/INFO]: [sikigami_izumo: Set [BomberMP] for jim_good to 799]
-[11:52:25] [Server thread/INFO]: [sikigami_izumo: Set [BomberMP] for jim_good to 799]
-[11:52:27] [Server thread/INFO]: jim_good was blown up by 爆裂ビーム
-[11:52:33] [Server thread/INFO]: [jim_good: Teleported jim_good to sikigami_izumo]
-[11:52:46] [Server thread/INFO]: [sikigami_izumo: Set [BomberMP] for jim_good to 799]
-[11:52:54] [Server thread/INFO]: [sikigami_izumo: Set [BomberMP] for jim_good to 799]
-[11:53:18] [Server thread/INFO]: [sikigami_izumo: Set own game mode to Creative Mode]
-[11:53:53] [Server thread/INFO]: [sikigami_izumo: Running function main:pvp/ashe/ashe_w]
-[11:54:02] [Server thread/INFO]: jim_good was shot by sikigami_izumo using [ボレー]
-[11:54:05] [Server thread/INFO]: [jim_good: Teleported jim_good to sikigami_izumo]
-[11:56:01] [Server thread/INFO]: jim_good lost connection: Disconnected
-[11:56:01] [Server thread/INFO]: jim_good left the game
-[12:45:06] [Server thread/INFO]: [sikigami_izumo: Gave 1 [Light] to sikigami_izumo]
-[12:52:44] [Server thread/INFO]: [sikigami_izumo: Set own game mode to Survival Mode]
-[12:53:37] [Server thread/INFO]: [sikigami_izumo: Set own game mode to Creative Mode]
-[12:53:40] [Server thread/INFO]: [sikigami_izumo: Set own game mode to Survival Mode]
-[12:53:42] [Server thread/INFO]: [sikigami_izumo: Set own game mode to Creative Mode]
-[12:53:44] [Server thread/INFO]: [sikigami_izumo: Set own game mode to Survival Mode]
-[13:07:20] [Server thread/INFO]: Stopping the server
-[13:07:20] [Server thread/INFO]: Stopping server
-[13:07:20] [Server thread/INFO]: Saving players
-[13:07:20] [Server thread/INFO]: sikigami_izumo lost connection: Server closed
-[13:07:20] [Server thread/INFO]: sikigami_izumo left the game
-[13:07:20] [Server thread/INFO]: Saving worlds
-[13:07:21] [Server thread/INFO]: Saving chunks for level 'ServerLevel[PVP_world]'/minecraft:overworld
-[13:07:21] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
-[13:07:21] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[13:08:56] [ServerMain/INFO]: Loaded 1487 advancements
+[13:08:57] [Server thread/INFO]: Starting minecraft server version 1.21.5
+[13:08:57] [Server thread/INFO]: Loading properties
+[13:08:57] [Server thread/INFO]: Default game type: SURVIVAL
+[13:08:57] [Server thread/INFO]: Generating keypair
+[13:08:57] [Server thread/INFO]: Starting Minecraft server on *:25565
+[13:08:58] [Server thread/INFO]: Using default channel type
+[13:08:58] [Server thread/INFO]: Preparing level "world"
+[13:08:58] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[13:08:58] [Worker-Main-16/INFO]: Preparing spawn area: 0%
+[13:08:58] [Server thread/INFO]: Time elapsed: 524 ms
+[13:08:58] [Server thread/INFO]: Done (0.696s)! For help, type "help"
+[13:09:20] [User Authenticator #1/INFO]: UUID of player sikigami_izumo is e5f93a1f-65a0-4419-ba71-c4fa0983d3f8
+[13:09:20] [Server thread/INFO]: sikigami_izumo[/127.0.0.1:54292] logged in with entity id 184 at (29.862056718123654, 1.0, 10006.074165333532)
+[13:09:20] [Server thread/INFO]: sikigami_izumo joined the game
+[13:23:56] [Server thread/INFO]: [sikigami_izumo: Set display slot sidebar to show objective rating]
+[13:27:08] [User Authenticator #2/INFO]: UUID of player jim_good is 0884a556-7508-4624-a6a5-79574dcf7362
+[13:27:08] [Server thread/INFO]: jim_good[/127.0.0.1:51929] logged in with entity id 1736 at (30.734777995185667, 1.0, 10015.207868653775)
+[13:27:08] [Server thread/INFO]: jim_good joined the game
+[13:28:15] [Server thread/INFO]: jim_good was shot by sikigami_izumo using [不見の影弓]
+[13:28:21] [Server thread/INFO]: [jim_good: Teleported jim_good to sikigami_izumo]
+[13:28:45] [Server thread/INFO]: jim_good was shot by sikigami_izumo using [不見の影弓]
+[13:28:47] [Server thread/INFO]: [jim_good: Teleported jim_good to sikigami_izumo]
+[13:28:50] [Server thread/INFO]: [sikigami_izumo: Set own game mode to Creative Mode]
+[13:29:10] [Server thread/INFO]: jim_good was shot by sikigami_izumo
+[13:29:12] [Server thread/INFO]: [jim_good: Teleported jim_good to sikigami_izumo]
+[13:29:43] [Server thread/INFO]: [sikigami_izumo: Set own game mode to Survival Mode]
+[13:29:52] [Server thread/INFO]: sikigami_izumo was slain by jim_good using [餓狼剣]
+[13:30:00] [Server thread/INFO]: jim_good was killed
+[13:30:05] [Server thread/INFO]: [jim_good: Teleported jim_good to sikigami_izumo]
+[13:30:21] [Server thread/INFO]: sikigami_izumo was slain by jim_good using [『我が腕は鋼鉄』]
+[13:31:13] [Server thread/INFO]: sikigami_izumo was slain by jim_good using [『我が腕は鋼鉄』]
+[13:31:26] [Server thread/INFO]: jim_good was slain by sikigami_izumo using [『我が腕は鋼鉄』]
+[13:31:34] [Server thread/INFO]: [jim_good: Teleported jim_good to sikigami_izumo]
+[13:31:56] [Server thread/INFO]: jim_good was slain by sikigami_izumo using [ライト]
+[13:31:58] [Server thread/INFO]: [jim_good: Teleported jim_good to sikigami_izumo]
+[13:31:59] [Server thread/INFO]: sikigami_izumo was slain by jim_good using [ライト]
+[13:33:51] [Server thread/INFO]: jim_good lost connection: Disconnected
+[13:33:51] [Server thread/INFO]: jim_good left the game
+[13:57:20] [Server thread/INFO]: sikigami_izumo lost connection: Disconnected
+[13:57:20] [Server thread/INFO]: sikigami_izumo left the game
+[13:58:20] [Server thread/INFO]: Server empty for 60 seconds, pausing
+[13:58:22] [User Authenticator #3/INFO]: UUID of player sikigami_izumo is e5f93a1f-65a0-4419-ba71-c4fa0983d3f8
+[13:58:22] [Server thread/INFO]: sikigami_izumo[/127.0.0.1:57023] logged in with entity id 2749 at (30.119627669544542, 1.0, 10010.202223798315)
+[13:58:22] [Server thread/INFO]: sikigami_izumo joined the game
+[14:01:13] [Server thread/INFO]: [sikigami_izumo: Gave 1 [Iron Sword] to sikigami_izumo]
+[14:01:39] [Server thread/INFO]: [sikigami_izumo: Set own game mode to Creative Mode]
+[14:08:59] [Server thread/INFO]: [sikigami_izumo: Gave 1 [Iron Sword] to sikigami_izumo]
+[14:10:42] [Server thread/INFO]: [sikigami_izumo: Reloading!]
+[14:10:42] [Worker-Main-39/ERROR]: Invalid path in pack: main:function/job_selection/FallenAngel.mcfunction, ignoring
+[14:10:42] [Worker-Main-39/ERROR]: Invalid path in pack: main:function/job_selection/元sword.mcfunction, ignoring
+[14:10:42] [Worker-Main-39/ERROR]: Invalid path in pack: main:function/pvp/elf/elf_particle/elf_particle_barrier(1).mcfunction, ignoring
+[14:10:42] [Worker-Main-39/ERROR]: Invalid path in pack: main:function/pvp/ticket/mastery copy.mcfunction, ignoring
+[14:10:42] [Worker-Main-39/ERROR]: Invalid path in pack: main:function/メモ帳.mcfunction, ignoring
+[14:10:42] [Worker-Main-39/ERROR]: Invalid path in pack: main:function/自由帳, ignoring
+[14:10:43] [Server thread/INFO]: Loaded 1373 recipes
+[14:10:43] [Server thread/ERROR]: Failed to load function main:job_selection/shaco
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 9: Unknown item 'minecraft:give' at position 8: give @p <--[HERE]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 9: Unknown item 'minecraft:give' at position 8: give @p <--[HERE]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:pvp/assist/assist_jum/assist_sky_sub
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Expected literal : at position 136: ...e_rod",nbt<--[HERE]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Expected literal : at position 136: ...e_rod",nbt<--[HERE]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:waiting_place/book/occupational_books
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 3: Expected whitespace to end one argument, but found trailing data at position 20: ...itten_book<--[HERE]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 3: Expected whitespace to end one argument, but found trailing data at position 20: ...itten_book<--[HERE]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:first/first_title
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 24: Incorrect argument for command at position 71: ...1 5011 90 <--[HERE]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 24: Incorrect argument for command at position 71: ...1 5011 90 <--[HERE]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:job_selection/bowcopy
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 18: Expected whitespace to end one argument, but found trailing data at position 68: ...:stone_axe<--[HERE]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 18: Expected whitespace to end one argument, but found trailing data at position 68: ...:stone_axe<--[HERE]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:job_selection/musician
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 21: Expected whitespace to end one argument, but found trailing data at position 35: ...on_a_stick<--[HERE]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 21: Expected whitespace to end one argument, but found trailing data at position 35: ...on_a_stick<--[HERE]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:job_selection/swordmaster
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 14: Expected whitespace to end one argument, but found trailing data at position 74: ...iron_sword<--[HERE]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 14: Expected whitespace to end one argument, but found trailing data at position 74: ...iron_sword<--[HERE]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:pvp/sword/throwsword_sub
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Expected whitespace to end one argument, but found trailing data at position 28: ...iron_sword<--[HERE]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Expected whitespace to end one argument, but found trailing data at position 28: ...iron_sword<--[HERE]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:job_selection/fighter
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 20: Unknown or incomplete command, see below for error at position 7: give @p<--[HERE]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 20: Unknown or incomplete command, see below for error at position 7: give @p<--[HERE]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:job_selection/shaman
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 11: Expected whitespace to end one argument, but found trailing data at position 30: ...lden_sword<--[HERE]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 11: Expected whitespace to end one argument, but found trailing data at position 30: ...lden_sword<--[HERE]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:waiting_place/endroll/endroll_sub
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 75: Expected whitespace to end one argument, but found trailing data at position 76: ...nce_bottle<--[HERE]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 75: Expected whitespace to end one argument, but found trailing data at position 76: ...nce_bottle<--[HERE]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:used_tatuzinken
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 1: Unknown or incomplete command, see below for error at position 40: ... at @s run<--[HERE]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 1: Unknown or incomplete command, see below for error at position 40: ... at @s run<--[HERE]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:pvp/musician/musician
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 5: Expected whitespace to end one argument, but found trailing data at position 80: ...disc_chirp<--[HERE]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 5: Expected whitespace to end one argument, but found trailing data at position 80: ...disc_chirp<--[HERE]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:job_selection/set_armor_stand/bowscouter
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Can't find element 'minecraft:minecraftarmor_stand' of type 'minecraft:entity_type' at position 27: ...rmor_stand<--[HERE]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Can't find element 'minecraft:minecraftarmor_stand' of type 'minecraft:entity_type' at position 27: ...rmor_stand<--[HERE]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:gatya
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 5: Unknown option 'tags' at position 14: ...ute as @a[<--[HERE]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 5: Unknown option 'tags' at position 14: ...ute as @a[<--[HERE]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:waiting_place/book/stage_books
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 3: Expected whitespace to end one argument, but found trailing data at position 20: ...itten_book<--[HERE]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 3: Expected whitespace to end one argument, but found trailing data at position 20: ...itten_book<--[HERE]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:pvp/assist2/assist_jum/assist_hallucinations_sub
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 8: Unknown particle: minecraft:ambient_entity_effect at position 84: ...ity_effect<--[HERE]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 8: Unknown particle: minecraft:ambient_entity_effect at position 84: ...ity_effect<--[HERE]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:wizard_jiyucho
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 9: Expected literal : at position 678: ..."敵の周囲を燃やす"<--[HERE]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 9: Expected literal : at position 678: ..."敵の周囲を燃やす"<--[HERE]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:job_selection/rengoku
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 15: Expected whitespace to end one argument, but found trailing data at position 23: ...rite_sword<--[HERE]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 15: Expected whitespace to end one argument, but found trailing data at position 23: ...rite_sword<--[HERE]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:mode/gatiarea/range_line_e
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Can't parse particle options: No key scale in MapLike[{}]; No key color in MapLike[{}]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Can't parse particle options: No key scale in MapLike[{}]; No key color in MapLike[{}]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:mode/gatiarea/range_line_d
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Can't parse particle options: No key scale in MapLike[{}]; No key color in MapLike[{}]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Can't parse particle options: No key scale in MapLike[{}]; No key color in MapLike[{}]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:mode/gatiarea/range_line_c
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Can't parse particle options: No key scale in MapLike[{}]; No key color in MapLike[{}]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Can't parse particle options: No key scale in MapLike[{}]; No key color in MapLike[{}]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:mode/gatiarea/range_line_b
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Can't parse particle options: No key scale in MapLike[{}]; No key color in MapLike[{}]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Can't parse particle options: No key scale in MapLike[{}]; No key color in MapLike[{}]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/ERROR]: Failed to load function main:mode/gatiarea/range_line_a
+java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Can't parse particle options: No key scale in MapLike[{}]; No key color in MapLike[{}]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770) ~[?:?]
+	at avu.b(SourceFile:52) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1423) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Caused by: java.lang.IllegalArgumentException: Whilst parsing command on line 4: Can't parse particle options: No key scale in MapLike[{}]; No key color in MapLike[{}]
+	at hy.a(SourceFile:80) ~[server-1.21.5.jar:?]
+	at amf.a(SourceFile:87) ~[server-1.21.5.jar:?]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	... 7 more
+[14:10:43] [Server thread/INFO]: Loaded 1487 advancements
+[14:18:37] [Server thread/INFO]: Named entity cps['画中人'/3795, l='ServerLevel[PVP_world]', x=30.79, y=6.00, z=10041.27] died: 画中人 was killed
+[14:18:37] [Server thread/INFO]: Named entity cps['画中人'/3796, l='ServerLevel[PVP_world]', x=31.45, y=6.00, z=10038.67] died: 画中人 was killed
+[14:57:07] [User Authenticator #4/INFO]: UUID of player jim_good is 0884a556-7508-4624-a6a5-79574dcf7362
+[14:57:08] [Server thread/INFO]: jim_good[/127.0.0.1:49317] logged in with entity id 4048 at (28.951282736300726, 1.0, 10022.811037728954)
+[14:57:08] [Server thread/INFO]: jim_good joined the game
+[14:57:11] [Server thread/INFO]: Stopping the server
+[14:57:11] [Server thread/INFO]: Stopping server
+[14:57:11] [Server thread/INFO]: Saving players
+[14:57:11] [Server thread/INFO]: Saving worlds
+[14:57:11] [Server thread/INFO]: Saving chunks for level 'ServerLevel[PVP_world]'/minecraft:overworld
+[14:57:11] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[14:57:11] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
