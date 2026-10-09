@@ -8,6 +8,8 @@ data remove storage main:stage_start running
 execute if data storage main:magicking {setup:1b} run function main:pvp/magicking/reset_world
 #上級ゲリラ兵の召喚物・ドロップ品・表示を削除
 execute if data storage main:guerrilla {setup:1b} run function main:pvp/guerrilla/reset_world
+#回復スナイパーの召喚物・付与した状態を解除
+execute if data storage main:healsniper {setup:1b} run function main:pvp/healsniper/reset_world
 
 #ジョブ能力によるエンティティと設置ブロックの削除
 function main:pvp/dusk/reset
@@ -86,6 +88,7 @@ tag @a remove Thor
 tag @a remove Peacekeeper
 execute as @a[tag=MagicKing] at @s run function main:pvp/magicking/reset_player
 execute as @a[tag=Guerrilla] at @s run function main:pvp/guerrilla/reset_player
+execute as @a[tag=HealSniper] at @s run function main:pvp/healsniper/reset_player
 function main:job_selection/tag_reset
 
 

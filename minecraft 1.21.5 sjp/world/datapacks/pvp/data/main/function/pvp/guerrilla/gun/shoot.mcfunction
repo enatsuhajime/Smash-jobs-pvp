@@ -2,6 +2,7 @@
 $scoreboard players set #sc GuCalc $(spread_c)
 $scoreboard players set #ss GuCalc $(spread_s)
 $scoreboard players set #mm GuCalc $(move)
+$scoreboard players set #cm GuCalc $(crouch_move)
 function main:pvp/guerrilla/gun/spread
 #射程（ブロック）→ 0.25ブロック刻みの歩数
 $scoreboard players set #st GuCalc $(range)
@@ -11,4 +12,7 @@ $data modify storage main:guerrilla shot merge value {dmg:$(dmg),hs:$(hs),pellet
 #距離減衰の開始距離（ブロック → 0.25ブロック刻みの歩数。0 なら減衰なし）
 $scoreboard players set #far GuCalc $(far)
 scoreboard players operation #far GuCalc *= #4 GuCalc
+#1回の射撃で同じ相手に与えるダメージの上限（×10で計算。0 なら上限なし）
+$scoreboard players set #maxd GuCalc $(max_dmg)
+scoreboard players operation #maxd GuCalc *= #10 GuCalc
 function main:pvp/guerrilla/gun/fire

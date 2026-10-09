@@ -81,3 +81,5 @@ execute if entity @a[tag=Poseidon] run function main:pvp/poseidon/poseidon
 execute if entity @a[tag=Shepherd] run function main:pvp/shepherd/shepherd
 #上級ゲリラ兵
 execute if entity @a[tag=Guerrilla] run function main:pvp/guerrilla/guerrilla
+#回復スナイパー
+execute if entity @a[tag=HealSniper] run function main:pvp/healsniper/healsniper

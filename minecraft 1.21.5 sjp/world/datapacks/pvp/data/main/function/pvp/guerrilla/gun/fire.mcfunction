@@ -1,5 +1,6 @@
 #弾を撃つ（実行者：射手。storage main:guerrilla shot の n/dmg/hs/steps/pellets を使う）
 tag @s add GuShooter
+scoreboard players reset * GuShotDmg
 scoreboard players set #hitsnd GuCalc 0
 scoreboard players set #team GuCalc 0
 execute if entity @s[team=Blue] run scoreboard players set #team GuCalc 1
