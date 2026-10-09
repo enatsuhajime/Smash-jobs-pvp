@@ -16,4 +16,4 @@ execute as @a[tag=Herobrine,scores={sneak=1..}] run execute at @s run particle m
 execute if entity @a[tag=Herobrine] run function main:pvp/herobrine/herobrine_door
 
 #誠実なる友
-execute if entity @a[tag=Herobrine,scores={health=..10,redstonecooldown=..0},nbt={Inventory:[{id:"minecraft:redstone"}]}] run function main:pvp/herobrine/herobrine_redstone
+execute if entity @a[tag=Herobrine,scores={health=..20,redstonecooldown=..0},nbt={Inventory:[{id:"minecraft:redstone"}]}] run function main:pvp/herobrine/herobrine_redstone

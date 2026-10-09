@@ -34,5 +34,11 @@
     "name": "sikigami_izumo",
     "level": 4,
     "bypassesPlayerLimit": false
+  },
+  {
+    "uuid": "0884a556-7508-4624-a6a5-79574dcf7362",
+    "name": "jim_good",
+    "level": 4,
+    "bypassesPlayerLimit": false
   }
 ]
