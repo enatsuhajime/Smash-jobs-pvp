@@ -20,8 +20,9 @@ data modify storage main:guerrilla param.rv set value {dmg:8,hs:15,pellets:1,ran
 #銃共通
 #  hs_radius ヘッドショット判定の半径（目の位置から）   assist アシストとみなす時間（tick）
 #  alt_model / alt_color  リロード中・コッキング中の見た目（革の馬鎧の染色色。10進のRGB値）
-#  self_trail_from / self_trail_size  撃った本人に見える小さな弾：表示を始める距離（ブロック）と大きさ
-data modify storage main:guerrilla param.common set value {hs_radius:0.45,assist:140,alt_model:"minecraft:leather_horse_armor",alt_color:4867385,self_trail_from:3,self_trail_size:0.3}
+#  trail_from / trail_size  弾の表示：表示を始める距離（ブロック。手前はクロスヘアにかからないよう出さない）と粒の大きさ
+#  whiz_radius  弾がこの距離（ブロック）以内をかすめた敵に風切り音を鳴らす
+data modify storage main:guerrilla param.common set value {hs_radius:0.45,assist:140,alt_model:"minecraft:leather_horse_armor",alt_color:4867385,trail_from:3,trail_size:0.3,whiz_radius:2}
 
 #ナイフ：damage 1撃のダメージ / backstab 背後からの追加ダメージ / angle 背後とみなす向きの差（±度）
 data modify storage main:guerrilla param.knife set value {damage:6,backstab:6,angle:60}

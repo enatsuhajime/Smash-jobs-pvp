@@ -23,13 +23,12 @@ execute as @p run function main:pvp/guerrilla/init_player
 clear @p
 execute as @p run function main:pvp/guerrilla/item/give_sg
 execute as @p run function main:pvp/guerrilla/item/give_knife
-give @p minecraft:bread 64
 
 #ステータス
 function main:job_selection/set/state_reset
 attribute @p minecraft:attack_damage base set 1
 attribute @p minecraft:attack_speed base set 1
-attribute @p minecraft:max_health base set 20
+attribute @p minecraft:max_health base set 30
 attribute @p minecraft:armor base set 0
 attribute @p minecraft:movement_speed base set 0.1
 attribute @p minecraft:entity_interaction_range base set 2

@@ -5,5 +5,4 @@ scoreboard players remove @a[scores={foodcd=1..}] foodcd 1
 execute as @a[scores={foodcd=..0,food=20..}] run scoreboard players set @s foodcd 600
 
 #再生能力付与
-#上級ゲリラ兵は基礎体力回復なし
-execute as @a[scores={foodcd=600,food=20..},tag=!Guerrilla] run effect give @s minecraft:regeneration 15 0 true
+execute as @a[scores={foodcd=600,food=20..}] run effect give @s minecraft:regeneration 15 0 true
