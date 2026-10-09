@@ -7,8 +7,9 @@
 #  hs_slow_sec / hs_slow_lv  ヘッドショット時の鈍足
 #  heal 味方の回復量（6 = 3ハート）  regen_sec / regen_lv  回復後に味方へ与える再生
 #  rpm 毎分の発射数（60 = 1秒に1発）  mag 装弾数  reload リロード時間（tick）  range 射程
+#  far / far_dmg / far_heal  距離減衰：far ブロックを超えると、敵へのダメージ（頭も）が far_dmg、味方の回復量が far_heal になる（far:0 で減衰なし）
 #  zoom スニーク中の移動速度の倍率の増減（-0.95 で約1.9倍ズーム。Minecraftの仕様上 -1 の約2倍が上限で、-1 だと動けない）
-data modify storage main:healsniper param.rifle set value {dmg:4,hs_dmg:4,hs_slow_sec:2,hs_slow_lv:0,heal:6,regen_sec:5,regen_lv:1,rpm:60,mag:10,reload:40,range:64,zoom:-0.95}
+data modify storage main:healsniper param.rifle set value {dmg:4,hs_dmg:4,hs_slow_sec:2,hs_slow_lv:0,heal:6,regen_sec:5,regen_lv:1,rpm:60,mag:10,reload:40,range:64,zoom:-0.95,far:20,far_dmg:1,far_heal:2}
 
 #麻酔弾（右クリックで発射。頭蓋骨のような弾がゆっくり飛ぶ）
 #  range 射程  speed 1tickに進む距離（2.5 = 0.2秒で10m）  cd クールダウン（tick）

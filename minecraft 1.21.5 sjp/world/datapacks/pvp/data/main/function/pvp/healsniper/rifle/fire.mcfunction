@@ -4,6 +4,8 @@ scoreboard players set #team HsCalc 0
 execute if entity @s[team=Blue] run scoreboard players set #team HsCalc 1
 execute if entity @s[team=Red] run scoreboard players set #team HsCalc 2
 execute store result score #steps HsCalc run data get storage main:healsniper param.rifle.range 4
+#距離減衰の開始距離（ブロック → 0.25ブロック刻みの歩数）
+execute store result score #far HsCalc run data get storage main:healsniper param.rifle.far 4
 execute store result score #tfrom HsCalc run data get storage main:healsniper param.common.trail_from 4
 scoreboard players set #hit HsCalc 0
 scoreboard players set #d HsCalc 0
