@@ -1,1 +1,5 @@
-give @s minecraft:iron_sword[custom_name={text:"ナイフ",color:"gold",italic:false},custom_data={gu:"knife",gu_item:1b},unbreakable={},attribute_modifiers=[{type:"minecraft:attack_damage",amount:5,operation:"add_value",slot:"mainhand",id:"main:gu_knife"}],lore=[{text:"1撃6ダメージ。背後から攻撃するとさらに6ダメージ（仮）",color:"gray",italic:false}]] 1
+#ナイフ（1撃のダメージは config の param.knife.damage）。プレイヤーの基礎攻撃力1を差し引いた値を武器に付ける
+execute store result score #k GuCalc run data get storage main:guerrilla param.knife.damage
+scoreboard players remove #k GuCalc 1
+execute store result storage main:guerrilla tmp.amount int 1 run scoreboard players get #k GuCalc
+function main:pvp/guerrilla/item/give_knife_m with storage main:guerrilla tmp

@@ -1,1 +1,1 @@
-give @s minecraft:carrot_on_a_stick[custom_name={text:"ショットガン",color:"gold",italic:false},custom_data={gu:"sg",gu_item:1b},item_model="minecraft:leather_horse_armor",unbreakable={},lore=[{text:"単発・RPM70・5発・10粒・1粒2/HS3・5mで しゃがみ2/通常4・移動2倍",color:"gray",italic:false},{text:"右クリックで射撃。しゃがむと精度が上がる",color:"gray",italic:false}]] 1
+give @s minecraft:carrot_on_a_stick[custom_name={text:"ショットガン",color:"gold",italic:false},custom_data={gu:"sg",gu_item:1b},item_model="minecraft:leather_horse_armor",unbreakable={},lore=[{text:"右クリックで射撃。しゃがむと精度が上がる",color:"gray",italic:false}]] 1

@@ -18,7 +18,7 @@ scoreboard players set @s GuRw1 0
 scoreboard players set @s GuRw3 0
 scoreboard players set @s GuRw5 0
 scoreboard players set @s GuRw10 0
-scoreboard players set @s GuAmmoSg 5
+execute store result score @s GuAmmoSg run data get storage main:guerrilla param.sg.mag
 scoreboard players set @s GuAmmoAk 0
 scoreboard players set @s GuMagAk 0
 scoreboard players set @s GuHasAk 0

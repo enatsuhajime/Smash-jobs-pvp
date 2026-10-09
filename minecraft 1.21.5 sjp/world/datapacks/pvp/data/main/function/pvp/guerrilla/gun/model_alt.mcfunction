@@ -1,2 +1,2 @@
-#リロード・コッキング中の見た目（仮：クロスボウ）
-item modify entity @s weapon.mainhand [{function:"minecraft:set_components",components:{"minecraft:item_model":"minecraft:crossbow"}},{function:"minecraft:set_custom_data",tag:{gu_alt:1b}}]
+#リロード・コッキング中の見た目（config の param.common.alt_model / alt_color）
+function main:pvp/guerrilla/gun/model_alt_m with storage main:guerrilla param.common

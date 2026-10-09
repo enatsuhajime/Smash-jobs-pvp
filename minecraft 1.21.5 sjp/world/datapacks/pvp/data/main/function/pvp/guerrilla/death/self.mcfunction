@@ -17,5 +17,5 @@ scoreboard players set @s GuMagRv 0
 clear @s *[minecraft:custom_data~{gu_loot:1b}]
 scoreboard players set @s GuReload 0
 scoreboard players set @s GuReloadW 0
-scoreboard players set @s GuAmmoSg 5
+execute store result score @s GuAmmoSg run data get storage main:guerrilla param.sg.mag
 function main:pvp/guerrilla/item/ensure

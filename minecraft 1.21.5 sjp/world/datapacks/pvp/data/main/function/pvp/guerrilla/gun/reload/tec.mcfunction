@@ -2,5 +2,5 @@
 execute if score @s GuReload matches 1.. run return 0
 execute unless score @s GuMagTec matches 1.. run return run playsound minecraft:block.dispenser.fail player @s ~ ~ ~ 0.5 2
 scoreboard players set @s GuReloadW 5
-scoreboard players set @s GuReload 30
+execute store result score @s GuReload run data get storage main:guerrilla param.tec.reload
 playsound minecraft:item.crossbow.loading_start player @a ~ ~ ~ 0.8 1.2

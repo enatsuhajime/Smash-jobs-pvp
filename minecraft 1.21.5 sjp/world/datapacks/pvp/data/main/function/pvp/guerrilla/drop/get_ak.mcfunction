@@ -1,7 +1,7 @@
 #すでに持っている場合は予備マガジン+1
 execute if score @s GuHasAk matches 1 run return run function main:pvp/guerrilla/drop/mag_ak
 scoreboard players set @s GuHasAk 1
-scoreboard players set @s GuAmmoAk 30
+execute store result score @s GuAmmoAk run data get storage main:guerrilla param.ak.mag
 scoreboard players set @s GuMagAk 0
 function main:pvp/guerrilla/item/give_ak
 playsound minecraft:item.armor.equip_iron player @a ~ ~ ~ 1 1.2

@@ -4,6 +4,8 @@ execute if data storage main:pick {active:1b} unless entity @p[tag=PickBypass] a
 execute if data storage main:pick {active:1b} unless entity @p[tag=PickBypass] run return 0
 
 execute unless data storage main:guerrilla {setup:1b} run function main:pvp/guerrilla/setup
+#調整用パラメーターを読み込む（config.mcfunction）
+function main:pvp/guerrilla/config
 
 execute at @e[tag=jobsentakuKun] run data merge block ~-18 ~3 ~ {front_text:{messages:["",{"text":"BAN"},"",""]},is_waxed:1b}
 execute if entity @a[tag=FirstBAN] run return run function main:job_selection/tag_reset2

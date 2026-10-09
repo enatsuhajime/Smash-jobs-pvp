@@ -3,5 +3,5 @@ execute on vehicle if entity @s[nbt={inGround:1b}] run kill @s
 execute if predicate main:gu_riding run return 0
 tag @s remove GuArrowM
 tag @s add GuStrike
-scoreboard players set @s GuCount 3
-scoreboard players set @s GuTimer 20
+execute store result score @s GuCount run data get storage main:guerrilla param.bombbow.count
+execute store result score @s GuTimer run data get storage main:guerrilla param.bombbow.warn

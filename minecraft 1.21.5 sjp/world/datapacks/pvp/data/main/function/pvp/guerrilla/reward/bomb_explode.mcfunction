@@ -1,4 +1,4 @@
-#仮：半径4・12ダメージ
-function main:pvp/guerrilla/fx/explode {r:4,d:12}
+#半径・ダメージは config の param.carpet
+function main:pvp/guerrilla/fx/explode with storage main:guerrilla param.carpet
 tp @s ~ -300 ~
 kill @s
