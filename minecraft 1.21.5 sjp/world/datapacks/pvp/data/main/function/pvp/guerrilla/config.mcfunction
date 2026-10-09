@@ -11,7 +11,7 @@
 #  mag     装弾数                      reload  リロード時間（tick）
 #  weight  持っている間の移動速度の増減（-0.15 = 15%遅い、0.1 = 10%速い）
 #  far / far_dmg  距離減衰：far ブロックを超えると、ダメージ（ヘッドショット含む）が far_dmg になる（1 = 0.5ハート。far:0 で減衰なし）
-data modify storage main:guerrilla param.sg set value {dmg:2,hs:3,pellets:10,range:20,rpm:70,spread_c:1131,spread_s:2180,move:20,mag:5,reload:30,weight:-0.1,far:10,far_dmg:1}
+data modify storage main:guerrilla param.sg set value {dmg:2,hs:3,pellets:8,range:20,rpm:70,spread_c:800,spread_s:1500,move:20,mag:5,reload:30,weight:-0.1,far:10,far_dmg:1}
 data modify storage main:guerrilla param.ak set value {dmg:3,hs:6,pellets:1,range:40,rpm:600,spread_c:571,spread_s:853,move:40,mag:30,reload:40,weight:-0.15,far:10,far_dmg:1}
 data modify storage main:guerrilla param.gl set value {dmg:3,hs:4,pellets:1,range:40,rpm:500,spread_c:571,spread_s:853,move:40,mag:35,reload:40,weight:-0.15,far:10,far_dmg:1}
 data modify storage main:guerrilla param.p90 set value {dmg:2,hs:2,pellets:1,range:40,rpm:960,spread_c:571,spread_s:1131,move:15,mag:50,reload:50,weight:0.1,far:10,far_dmg:1}

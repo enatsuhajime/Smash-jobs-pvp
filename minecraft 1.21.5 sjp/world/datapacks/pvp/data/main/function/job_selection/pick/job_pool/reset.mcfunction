@@ -31,9 +31,13 @@ scoreboard players set prototype PickPool 0
 scoreboard players set birdman PickPool 0
 scoreboard players set dusk PickPool 0
 scoreboard players set magicking PickPool 0
-scoreboard players set guerrilla PickPool 0
 
 # 未実装・実装予定ジョブ
 scoreboard players set fighter PickPool 3
 scoreboard players set magic PickPool 3
 scoreboard players set musician PickPool 3
+
+# 非公開ジョブ（看板・ピック・ランダム割り当てに出さない。/function main:job_selection/<job> でのみ選択）
+# 公開するときは 0 にする
+scoreboard players set guerrilla PickPool 3
+scoreboard players set healsniper PickPool 3

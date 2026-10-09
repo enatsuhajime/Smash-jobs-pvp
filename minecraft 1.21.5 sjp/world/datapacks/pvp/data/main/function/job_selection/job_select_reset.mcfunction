@@ -129,6 +129,4 @@ execute at @e[tag=jobsentakuKun] run data merge block ~-15 ~3 ~ {front_text:{mes
 
 #魔王
 execute at @e[tag=jobsentakuKun] run data merge block ~-16 ~3 ~ {front_text:{messages:["",{"text":"【魔王】を選ぶ！","color":"white","click_event":{"action":"run_command","command":"/function main:job_selection/magicking"}},"",""]}}
-#上級ゲリラ兵（看板位置は要確認）
-execute at @e[tag=jobsentakuKun] run data merge block ~-18 ~3 ~ {front_text:{messages:["",{"text":"【上級ゲリラ兵】を選ぶ！","color":"white","click_event":{"action":"run_command","command":"/function main:job_selection/guerrilla"}},"",""]}}
 
